@@ -75,39 +75,26 @@
 
     .nav-links a:hover { color: var(--cream); }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
-      position: relative;
       width: 100%;
       background: var(--olive-dark);
-      overflow: hidden;
+      padding-top: 64px; /* nav height */
     }
 
     .hero-banner {
       display: block;
       width: 100%;
       height: auto;
-      filter: saturate(0.75) brightness(0.72);
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 0 6% 0 0;
-      background: linear-gradient(to right,
-        rgba(43,51,32,0.1) 0%,
-        rgba(43,51,32,0.05) 42%,
-        rgba(43,51,32,0.55) 58%,
-        rgba(43,51,32,0.78) 100%
-      );
+      filter: saturate(0.75) brightness(0.85);
     }
 
     .hero-text {
-      max-width: 400px;
+      padding: 3.5rem 6rem;
       text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
     }
 
     .hero-eyebrow {
@@ -139,6 +126,7 @@
       color: var(--text-light);
       line-height: 1.7;
       margin-bottom: 1.8rem;
+      max-width: 440px;
     }
 
     .hero-triad {
