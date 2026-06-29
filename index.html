@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Académie de Bellefon — Ostéopathie & Coaching</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --olive:       #3d4a2e;
+      --olive-dark:  #2b3320;
+      --olive-mid:   #4f5f3a;
+      --cream:       #f5f2ec;
+      --cream-warm:  #ece8df;
+      --white:       #ffffff;
+      --gold:        #b8a97a;
+      --text-light:  #d4cfc5;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--olive-dark);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(43, 51, 32, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      color: var(--cream);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cream); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--olive-dark);
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 5rem 5rem 6rem;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--text-light);
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-triad {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .triad-word {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--cream);
+      opacity: 0.85;
+    }
+
+    .triad-sep {
+      color: var(--gold);
+      opacity: 0.5;
+      align-self: center;
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--olive-dark) 0%, transparent 30%);
+      z-index: 1;
+    }
+
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: saturate(0.7) brightness(0.85);
+    }
+
+    /* decorative vertical line */
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold) 40%, var(--gold) 60%, transparent);
+      opacity: 0.3;
+    }
+
+    /* ── SECTION IDENTITÉ ── */
+    .section {
+      padding: 7rem 6rem;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--olive-dark);
+      margin-bottom: 2rem;
+    }
+
+    .identity {
+      background: var(--cream);
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      margin-top: 4rem;
+    }
+
+    .identity-body {
+      font-size: 0.95rem;
+      color: #4a4a3a;
+      line-height: 1.8;
+    }
+
+    .identity-body p + p { margin-top: 1.2rem; }
+
+    .values-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .value-item {
+      border-left: 2px solid var(--gold);
+      padding-left: 1.4rem;
+    }
+
+    .value-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--olive-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .value-desc {
+      font-size: 0.82rem;
+      color: #6a6a55;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── PRATICIENS ── */
+    .praticiens {
+      background: var(--olive-dark);
+      padding: 7rem 6rem;
+    }
+
+    .praticiens .section-title { color: var(--cream); }
+
+    .praticiens-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .praticien-card {
+      background: var(--olive-mid);
+      border: 1px solid rgba(184, 169, 122, 0.2);
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      transition: border-color 0.3s;
+    }
+
+    .praticien-card:hover { border-color: var(--gold); }
+
+    .praticien-initials {
+      width: 56px;
+      height: 56px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--gold);
+    }
+
+    .praticien-name {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.1;
+    }
+
+    .praticien-role {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .praticien-bio {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .btn-doctolib {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.85rem 1.8rem;
+      transition: background 0.25s, color 0.25s;
+      align-self: flex-start;
+    }
+
+    .btn-doctolib:hover {
+      background: var(--gold);
+      color: var(--olive-dark);
+    }
+
+    .btn-doctolib svg {
+      width: 14px; height: 14px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ── CTA BOTTOM ── */
+    .cta-section {
+      background: var(--cream-warm);
+      padding: 6rem 6rem;
+      text-align: center;
+    }
+
+    .cta-section .section-title {
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .cta-sub {
+      font-size: 0.9rem;
+      color: #6a6a55;
+      margin-bottom: 3rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--olive-dark);
+      color: var(--cream);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1rem 2.5rem;
+      transition: background 0.25s;
+    }
+
+    .btn-primary:hover { background: var(--olive-mid); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--olive-dark);
+      padding: 2.5rem 6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--cream);
+      opacity: 0.7;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      opacity: 0.5;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 7rem 2rem 3rem; }
+      .hero-left::after { display: none; }
+      .hero-right { height: 300px; }
+
+      .section { padding: 4rem 2rem; }
+      .identity-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .praticiens { padding: 4rem 2rem; }
+      .praticiens-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 4rem 2rem; }
+      footer { flex-direction: column; gap: 1rem; padding: 2rem; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Académie de Bellefon</a>
+  <ul class="nav-links">
+    <li><a href="#identite">Le cabinet</a></li>
+    <li><a href="#praticiens">Praticiens</a></li>
+    <li><a href="#rdv">Prendre RDV</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Ostéopathie · Coaching · Excellence</p>
+    <h1 class="hero-title">
+      Académie<br>
+      <em>de Bellefon</em>
+    </h1>
+    <p class="hero-sub">
+      Un cabinet parisien fondé sur trois convictions : le corps et l'esprit se répondent, 
+      le mouvement libère, et chaque patient mérite un soin d'exception.
+    </p>
+    <div class="hero-triad">
+      <span class="triad-word">Action</span>
+      <span class="triad-sep">·</span>
+      <span class="triad-word">Alignement</span>
+      <span class="triad-sep">·</span>
+      <span class="triad-word">Activation</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <!-- Replace src with a photo of your cabinet or team if desired -->
+    <img src="LinkedInCover.png" alt="Académie de Bellefon" />
+  </div>
+</section>
+
+<!-- IDENTITÉ -->
+<section class="section identity" id="identite">
+  <p class="section-label">Le cabinet</p>
+  <h2 class="section-title">Une approche globale,<br>des experts d'élite</h2>
+  <div class="identity-grid">
+    <div class="identity-body">
+      <p>
+        L'Académie de Bellefon réunit des ostéopathes, coachs et professionnels 
+        de santé issus des institutions les plus prestigieuses. Notre approche 
+        intègre la rigueur clinique de l'ostéopathie à des méthodes de coaching 
+        éprouvées par les plus hauts niveaux de performance.
+      </p>
+      <p>
+        Que vous veniez pour une douleur chronique, une préparation sportive ou 
+        un accompagnement de vie, chaque séance est pensée pour révéler votre 
+        plein potentiel — physique, mental, et humain.
+      </p>
+      <p>
+        Le cabinet reçoit sur rendez-vous à Paris, avec une disponibilité étendue 
+        pour s'adapter à vos contraintes.
+      </p>
+    </div>
+    <div class="values-col">
+      <div class="value-item">
+        <div class="value-name">Action</div>
+        <div class="value-desc">Chaque consultation débouche sur un protocole concret, adapté à votre réalité.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-name">Alignement</div>
+        <div class="value-desc">Corps, posture et trajectoire de vie réconciliés dans une vision cohérente.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-name">Activation</div>
+        <div class="value-desc">Libérer les ressources qui sont déjà en vous — c'est notre engagement.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRATICIENS -->
+<section class="praticiens" id="praticiens">
+  <p class="section-label" style="color:var(--gold)">Vos praticiens</p>
+  <h2 class="section-title">Rencontrez<br>Emmanuel & Audrey</h2>
+  <div class="praticiens-grid">
+
+    <!-- Emmanuel -->
+    <div class="praticien-card">
+      <div class="praticien-initials">E</div>
+      <div>
+        <div class="praticien-role">Ostéopathe D.O.</div>
+        <div class="praticien-name">Emmanuel<br>de Bellefon</div>
+      </div>
+      <p class="praticien-bio">
+        Ostéopathe diplômé d'une institution de référence, Emmanuel conjugue 
+        expertise clinique et vision de coach pour des prises en charge globales. 
+        Spécialisé dans les douleurs musculo-squelettiques, la performance sportive 
+        et l'accompagnement des dirigeants, il intervient là où le corps exprime 
+        ce que les mots ne disent pas encore.
+      </p>
+      <a class="btn-doctolib" href="https://www.doctolib.fr/osteopathe/paris/emmanuel-de-bellefon?pid=practice-463641" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M19 4H5a3 3 0 00-3 3v10a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3zm1 13a1 1 0 01-1 1H5a1 1 0 01-1-1V9h16v8zm0-10H4V7a1 1 0 011-1h14a1 1 0 011 1v1z"/></svg>
+        Prendre RDV sur Doctolib
+      </a>
+    </div>
+
+    <!-- Audrey -->
+    <div class="praticien-card">
+      <div class="praticien-initials">A</div>
+      <div>
+        <div class="praticien-role">Ostéopathe D.O.</div>
+        <div class="praticien-name">Audrey<br>Bucaille</div>
+      </div>
+      <p class="praticien-bio">
+        Ostéopathe diplômée avec une formation de haut niveau, Audrey apporte 
+        une écoute fine et une approche structurelle rigoureuse. Elle accompagne 
+        ses patients dans des problématiques variées — douleurs chroniques, 
+        grossesse, nourrissons, troubles fonctionnels — avec une attention 
+        particulière portée à la globalité de la personne.
+      </p>
+      <a class="btn-doctolib" href="https://www.doctolib.fr/osteopathe/paris/audrey-bucaille?pid=practice-444057" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M19 4H5a3 3 0 00-3 3v10a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3zm1 13a1 1 0 01-1 1H5a1 1 0 01-1-1V9h16v8zm0-10H4V7a1 1 0 011-1h14a1 1 0 011 1v1z"/></svg>
+        Prendre RDV sur Doctolib
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="rdv">
+  <p class="section-label">Votre première séance</p>
+  <h2 class="section-title">Prêt à passer à l'action ?</h2>
+  <p class="cta-sub">Choisissez votre praticien et réservez directement en ligne, sans attente.</p>
+  <div class="cta-buttons">
+    <a class="btn-primary" href="https://www.doctolib.fr/osteopathe/paris/emmanuel-de-bellefon?pid=practice-463641" target="_blank" rel="noopener">
+      RDV avec Emmanuel
+    </a>
+    <a class="btn-primary" href="https://www.doctolib.fr/osteopathe/paris/audrey-bucaille?pid=practice-444057" target="_blank" rel="noopener">
+      RDV avec Audrey
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Académie de Bellefon — Paris</span>
+  <span class="footer-copy">© 2025 · Tous droits réservés</span>
+</footer>
+
+</body>
+</html>
