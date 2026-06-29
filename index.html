@@ -59,7 +59,7 @@
     }
 
     .nav-signature {
-      height: 36px;
+      height: 48px;
       opacity: 0.7;
       filter: brightness(1.4);
     }
@@ -84,50 +84,23 @@
     /* ── HERO ── */
     .hero {
       width: 100%;
-      min-height: 100vh;
-      padding-top: 64px;
       background: var(--olive-dark);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    /* Image side */
-    .hero-image-wrap {
-      position: relative;
-      overflow: hidden;
+      padding-top: 64px;
     }
 
     .hero-banner {
       display: block;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
+      height: auto;
       filter: saturate(0.75) brightness(0.85);
     }
 
-    /* Soft gradient fade on the right edge toward olive-dark */
-    .hero-image-wrap::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to right,
-        transparent 50%,
-        rgba(43,51,32,0.55) 75%,
-        var(--olive-dark) 100%
-      );
-      pointer-events: none;
-    }
-
-    /* Text side */
     .hero-text {
+      padding: 3.5rem 6rem;
+      text-align: right;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: flex-end;
-      text-align: right;
-      padding: 5rem 5rem 5rem 2rem;
     }
 
     .hero-eyebrow {
@@ -159,7 +132,7 @@
       color: var(--text-light);
       line-height: 1.7;
       margin-bottom: 1.8rem;
-      max-width: 380px;
+      max-width: 440px;
     }
 
     .hero-triad {
@@ -325,11 +298,9 @@
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
-      .nav-signature { height: 28px; }
+      .nav-signature { height: 36px; }
 
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-image-wrap { height: 65vw; }
-      .hero-text { padding: 3rem 2rem; align-items: flex-start; text-align: left; }
+      .hero-text { padding: 2.5rem 2rem; align-items: flex-start; text-align: left; }
       .hero-triad { justify-content: flex-start; }
 
       .section { padding: 4rem 2rem; }
@@ -358,11 +329,9 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-image-wrap">
-    <img class="hero-banner" src="LinkedInCover.png" alt="Académie de Bellefon" />
-  </div>
+  <img class="hero-banner" src="LinkedInCover.png" alt="Académie de Bellefon" />
   <div class="hero-text">
-    <p class="hero-eyebrow"> Formation · Santé · Excellence</p>
+    <p class="hero-eyebrow">Formation · Santé · Excellence</p>
     <h1 class="hero-title">
       Académie<br>
       <em>de Bellefon</em>
