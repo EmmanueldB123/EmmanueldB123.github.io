@@ -225,14 +225,12 @@
 
     .praticien-card:hover { border-color: var(--gold); }
 
-    .praticien-initials {
+    .praticien-photo {
       width: 56px; height: 56px;
       border: 1px solid var(--gold);
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display);
-      font-size: 1.3rem; font-weight: 400;
-      color: var(--gold);
+      object-fit: cover;
+      display: block;
     }
 
     .praticien-name {
@@ -384,7 +382,7 @@
   <div class="praticiens-grid">
 
     <div class="praticien-card">
-      <div class="praticien-initials">E</div>
+      <img class="praticien-photo" src="Emmanuel_photo.png" alt="Emmanuel de Bellefon" />
       <div>
         <div class="praticien-role">Ostéopathe D.O. & Coach</div>
         <div class="praticien-name">Emmanuel<br>de Bellefon</div>
@@ -402,7 +400,7 @@
     </div>
 
     <div class="praticien-card">
-      <div class="praticien-initials">A</div>
+      <img class="praticien-photo" src="Audrey_photo.png" alt="Audrey Bucaille" />
       <div>
         <div class="praticien-role">Ostéopathe D.O. & Coach</div>
         <div class="praticien-name">Audrey<br>Bucaille</div>
