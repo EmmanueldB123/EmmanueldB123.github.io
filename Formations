@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formations — Académie de Bellefon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --olive:       #3d4a2e;
+      --olive-dark:  #2b3320;
+      --olive-mid:   #4f5f3a;
+      --cream:       #f5f2ec;
+      --cream-warm:  #ece8df;
+      --white:       #ffffff;
+      --gold:        #b8a97a;
+      --text-light:  #d4cfc5;
+
+      /* Couleurs de niveau, dans l'esprit de l'échelle de progression */
+      --lvl1: #3f8f86;
+      --lvl2: #c99a3f;
+      --lvl3: #c9713f;
+      --lvl4: #a83a55;
+      --lvl5: #2d4a73;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--olive-dark);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(43, 51, 32, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      color: var(--cream);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .nav-signature {
+      height: 48px;
+      opacity: 0.7;
+      filter: brightness(1.4);
+      margin-left: 4rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cream); }
+    .nav-links a.active { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero-formations {
+      background: var(--olive-dark);
+      padding: 11rem 6rem 6rem;
+      text-align: center;
+    }
+
+    .hero-eyebrow-top {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-formations-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-formations-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-formations-sub {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ── PROGRESSION RAIL ── */
+    .progression-rail {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-top: 3.5rem;
+      flex-wrap: wrap;
+    }
+
+    .rail-step {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1.4rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.55;
+      transition: opacity 0.2s;
+    }
+
+    .rail-step:hover { opacity: 1; }
+
+    .rail-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    .rail-sep { color: var(--text-light); opacity: 0.3; }
+
+    /* ── NIVEAU SECTION ── */
+    .niveau {
+      padding: 5.5rem 6rem;
+      border-top: 1px solid rgba(61,74,46,0.08);
+    }
+
+    .niveau-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .niveau-number {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--niveau-color);
+    }
+
+    .niveau-title-group h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+      font-weight: 300;
+      color: var(--olive-dark);
+    }
+
+    .niveau-title-group p {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--niveau-color);
+      margin-top: 0.3rem;
+    }
+
+    .niveau-rule {
+      height: 2px;
+      width: 100%;
+      background: var(--niveau-color);
+      opacity: 0.25;
+      margin: 2.4rem 0 3rem;
+    }
+
+    .formations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.2rem;
+    }
+
+    .formation-card {
+      background: var(--white);
+      border: 1px solid rgba(61,74,46,0.1);
+      border-top: 3px solid var(--niveau-color);
+      padding: 2.2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .formation-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(43,51,32,0.1);
+    }
+
+    .formation-name {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--olive-dark);
+      line-height: 1.2;
+    }
+
+    .formation-desc {
+      font-size: 0.85rem;
+      color: #6a6a55;
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .formation-tag {
+      align-self: flex-start;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--niveau-color);
+      border: 1px solid var(--niveau-color);
+      padding: 0.35rem 0.8rem;
+      opacity: 0.85;
+    }
+
+    /* ── CTA ── */
+    .cta-formations {
+      background: var(--cream-warm);
+      padding: 6rem;
+      text-align: center;
+    }
+
+    .cta-formations h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      color: var(--olive-dark);
+      margin-bottom: 1.2rem;
+    }
+
+    .cta-formations p {
+      font-size: 0.9rem;
+      color: #6a6a55;
+      margin-bottom: 2.4rem;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--olive-dark); color: var(--cream);
+      font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+      text-decoration: none; padding: 1rem 2.5rem;
+      transition: background 0.25s;
+    }
+    .btn-primary:hover { background: var(--olive-mid); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--olive-dark);
+      padding: 2.5rem 6rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1rem; font-weight: 300; letter-spacing: 0.12em;
+      color: var(--cream); opacity: 0.7;
+    }
+
+    .footer-copy { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--text-light); opacity: 0.5; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .nav-signature { height: 36px; }
+
+      .hero-formations { padding: 8rem 1.5rem 3.5rem; }
+      .progression-rail { gap: 0.3rem; }
+
+      .niveau { padding: 3.5rem 1.5rem; }
+      .niveau-header { flex-direction: column; gap: 0.4rem; }
+      .formations-grid { grid-template-columns: 1fr; }
+
+      .cta-formations { padding: 3.5rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; padding: 2rem; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Académie de Bellefon</a>
+  <img class="nav-signature" src="signature_Transparent.png" alt="Signature E. de Bellefon" />
+  <ul class="nav-links">
+    <li><a href="index.html#identite">Le cabinet</a></li>
+    <li><a href="index.html#praticiens">Praticiens</a></li>
+    <li><a href="index.html#avis">Avis</a></li>
+    <li><a href="formations.html" class="active">Formations</a></li>
+    <li><a href="index.html#rdv">Prendre RDV</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero-formations">
+  <p class="hero-eyebrow-top">Parcours pédagogique</p>
+  <h1 class="hero-formations-title">L'Échelle de la<br><em>Maîtrise Physique</em></h1>
+  <p class="hero-formations-sub">
+    Cinq niveaux, du réveil articulaire à l'expertise athlétique. Chaque formation s'inscrit dans une progression pensée pour construire mobilité, gainage et force, étape par étape.
+  </p>
+
+  <div class="progression-rail">
+    <span class="rail-step"><span class="rail-dot" style="background:var(--lvl1)"></span>Niveau 1 · Mobilité Fondamentale</span>
+    <span class="rail-sep">—</span>
+    <span class="rail-step"><span class="rail-dot" style="background:var(--lvl2)"></span>Niveau 2 · Mobilité Fonctionnelle</span>
+    <span class="rail-sep">—</span>
+    <span class="rail-step"><span class="rail-dot" style="background:var(--lvl3)"></span>Niveau 3 · Stabilité & Coordination</span>
+    <span class="rail-sep">—</span>
+    <span class="rail-step"><span class="rail-dot" style="background:var(--lvl4)"></span>Niveau 4 · Expert du Mouvement</span>
+    <span class="rail-sep">—</span>
+    <span class="rail-step"><span class="rail-dot" style="background:var(--lvl5)"></span>Niveau 5 · Professionnel</span>
+  </div>
+</section>
+
+<!-- NIVEAU 1 -->
+<section class="niveau" style="--niveau-color: var(--lvl1)">
+  <div class="niveau-header">
+    <span class="niveau-number">01</span>
+    <div class="niveau-title-group">
+      <h2>Mobilité Fondamentale</h2>
+      <p>Le socle du mouvement</p>
+    </div>
+  </div>
+  <div class="niveau-rule"></div>
+  <div class="formations-grid">
+    <div class="formation-card">
+      <span class="formation-tag">Fondamentaux</span>
+      <div class="formation-name">Éveil Articulaire et Isolation</div>
+      <p class="formation-desc">Mobilité isolée des cervicales, des omoplates, des hanches et du tronc pour préparer le corps au mouvement.</p>
+    </div>
+    <div class="formation-card">
+      <span class="formation-tag">Fondamentaux</span>
+      <div class="formation-name">Engagement Musculaire de Base</div>
+      <p class="formation-desc">Exercices simples comme la montée de genoux (psoas) et de talons, avec un gainage contrôlé du tronc.</p>
+    </div>
+    <div class="formation-card">
+      <span class="formation-tag">Fondamentaux</span>
+      <div class="formation-name">Coordination Initiale</div>
+      <p class="formation-desc">Synchronisation des poignets avec la montée de talons et travail de la souplesse de la colonne.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NIVEAU 2 -->
+<section class="niveau" style="--niveau-color: var(--lvl2)">
+  <div class="niveau-header">
+    <span class="niveau-number">02</span>
+    <div class="niveau-title-group">
+      <h2>Mobilité Fonctionnelle</h2>
+      <p>Construire la base du mouvement</p>
+    </div>
+  </div>
+  <div class="niveau-rule"></div>
+  <div class="formations-grid">
+    <div class="formation-card">
+      <span class="formation-tag">Intégration</span>
+      <div class="formation-name">Fondations du Squat</div>
+      <p class="formation-desc">10 répétitions sollicitant la mobilité des chevilles, des genoux, des hanches et du bas du dos.</p>
+    </div>
+    <div class="formation-card">
+      <span class="formation-tag">Intégration</span>
+      <div class="formation-name">Gainage Dynamique et Stabilité</div>
+      <p class="formation-desc">Introduction de la planche, des fentes avec maintien (5 répétitions) et des pompes sur les genoux.</p>
+    </div>
+    <div class="formation-card">
+      <span class="formation-tag">Intégration</span>
+      <div class="formation-name">Introduction à la Dissociation</div>
+      <p class="formation-desc">Utilisation du Deadlift pour séparer le travail du bas et du haut du corps, complété par les rites tibétains.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NIVEAU 3 -->
+<section class="niveau" style="--niveau-color: var(--lvl3)">
+  <div class="niveau-header">
+    <span class="niveau-number">03</span>
+    <div class="niveau-title-group">
+      <h2>Stabilité & Coordination</h2>
+      <p>Niveau intermédiaire</p>
+    </div>
+  </div>
+  <div class="niveau-rule"></div>
+  <div class="formations-grid">
+    <div class="formation-card">
+      <span class="formation-tag">Intermédiaire</span>
+      <div class="formation-name">Dynamisme et Cardio</div>
+      <p class="formation-desc">Intégration des jumping jacks, des squats dynamiques et des fentes marchées pour augmenter l'intensité.</p>
+    </div>
+    <div class="formation-card">
+      <span class="formation-tag">Intermédiaire</span>
+      <div class="formation-name">Gainage Avancé</div>
+      <p class="formation-desc">Variantes de planches latérales sur l'avant-bras, planches inversées et planches avec touché-épaules.</p>
+    </div>
+    <div class="formation-card">
+      <span class="formation-tag">Intermédiaire</span>
+      <div class="formation-name">Transition vers la Force</div>
+      <p class="formation-desc">Passage aux pompes sur les pieds et introduction du Pushup Pilates, combinant souplesse de la colonne et force.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NIVEAU 4 -->
+<section class="niveau" style="--niveau-color: var(--lvl4)">
+  <div class="niveau-header">
+    <span class="niveau-number">04</span>
+    <div class="niveau-title-group">
+      <h2>Expert du Mouvement</h2>
+      <p>Vers la performance</p>
+    </div>
+  </div>
+  <div class="niveau-rule"></div>
+  <div class="formations-grid">
+    <div class="formation-card">
+      <span class="formation-tag">Avancé</span>
+      <div class="formation-name">Agilité et Puissance Explosive</div>
+      <p class="formation-desc">Enchaînement de mouvements complexes tels que les burpees, le mountain climber et la corde à sauter.</p>
+    </div>
+    <div class="formation-card">
+      <span class="formation-tag">Avancé</span>
+      <div class="formation-name">Gainage de Haute Intensité</div>
+      <p class="formation-desc">Travail spécifique sur les planches latérales sur main, le "Planche Crossing" et le "Hip Hip".</p>
+    </div>
+    <div class="formation-card">
+      <span class="formation-tag">Avancé</span>
+      <div class="formation-name">Force de Traction et de Compression</div>
+      <p class="formation-desc">Maîtrise des tractions, du L-sit (maintien en équerre) et des pompes diamant.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NIVEAU 5 -->
+<section class="niveau" style="--niveau-color: var(--lvl5)">
+  <div class="niveau-header">
+    <span class="niveau-number">05</span>
+    <div class="niveau-title-group">
+      <h2>Professionnel</h2>
+      <p>Expertise athlétique</p>
+    </div>
+  </div>
+  <div class="niveau-rule"></div>
+  <div class="formations-grid">
+    <div class="formation-card">
+      <span class="formation-tag">Expert</span>
+      <div class="formation-name">Force Statique Extrême</div>
+      <p class="formation-desc">Maîtrise du grand écart, du pont complet et de la "Planche Flag" (drapeau).</p>
+    </div>
+    <div class="formation-card">
+      <span class="formation-tag">Expert</span>
+      <div class="formation-name">Maîtrise de la Suspension (Hanging)</div>
+      <p class="formation-desc">Réalisation de figures de haut niveau : Front Lever, Back Lever, Skin the Cat et Kon Cross.</p>
+    </div>
+    <div class="formation-card">
+      <span class="formation-tag">Expert</span>
+      <div class="formation-name">Équilibre et Acrobaties</div>
+      <p class="formation-desc">Handstands (marche, pompes en équilibre), power moves et acrobaties (tricking).</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-formations">
+  <h2>Une progression, un accompagnement</h2>
+  <p>Chaque formation est encadrée pour respecter votre niveau et vous faire progresser en toute sécurité.</p>
+  <a class="btn-primary" href="index.html#rdv">Nous contacter</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo"> Académie de Bellefon </span>
+  <span class="footer-logo"> Étretat . Paris . Nice </span>
+  <span class="footer-copy">© 2026 · Tous droits réservés</span>
+</footer>
+
+</body>
+</html>
