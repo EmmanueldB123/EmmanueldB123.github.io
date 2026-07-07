@@ -398,33 +398,83 @@
     .footer-copy { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--text-light); opacity: 0.5; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
-      .nav-signature { height: 36px; }
+   @media (max-width: 900px) {
 
-      .hero-banner { object-position: top center; }
+  nav{
+    flex-direction:column;
+    align-items:center;
+    gap:1rem;
+    padding:1rem;
+  }
 
-      .hero-text { padding: 2.5rem 2rem; align-items: flex-start; text-align: left; }
-      .hero-triad { justify-content: flex-start; }
+  .nav-logo{
+    text-align:center;
+  }
 
-      .section { padding: 4rem 2rem; }
-      .identity-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .praticiens { padding: 4rem 2rem; }
-      .praticiens-grid { grid-template-columns: 1fr; }
-      .reviews { padding: 4rem 2rem; }
-      .reviews-grid { grid-template-columns: 1fr; }
-      .podcast { padding: 4rem 2rem; flex-direction: column; text-align: center; align-items: center; }
-      .podcast-text { text-align: center; }
-      .cta-section { padding: 4rem 2rem; }
-      footer { flex-direction: column; gap: 1rem; padding: 2rem; text-align: center; }
-    }
+  .nav-signature{
+    height:32px;
+    margin-left:0;
+    opacity:.8;
+  }
 
-    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-  </style>
-</head>
-<body>
+  .nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:.8rem 1.2rem;
+    width:100%;
+  }
 
+  .nav-links a{
+    font-size:.68rem;
+    white-space:nowrap;
+  }
+
+  .hero{
+    padding-top:165px;
+  }
+
+  .hero-banner{
+    object-position:top center;
+  }
+
+  .hero-text{
+    padding:2rem 1.5rem;
+    text-align:left;
+    align-items:flex-start;
+  }
+
+  .hero-triad{
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    gap:.5rem;
+  }
+
+  .section{
+    padding:4rem 1.5rem;
+  }
+
+  .identity-grid,
+  .praticiens-grid,
+  .reviews-grid{
+    grid-template-columns:1fr;
+  }
+
+  .praticiens,
+  .reviews,
+  .podcast,
+  .cta-section{
+    padding:4rem 1.5rem;
+  }
+
+  footer{
+    flex-direction:column;
+    gap:1rem;
+    text-align:center;
+    padding:2rem 1rem;
+  }
+
+}
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">Académie de Bellefon</a>
