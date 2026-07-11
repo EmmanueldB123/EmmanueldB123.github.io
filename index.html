@@ -375,6 +375,8 @@
     .podcast .section-title { color: var(--cream); margin-bottom: 1rem; }
     .podcast-sub { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; }
 
+    .podcast-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
     .btn-spotify {
       display: inline-flex; align-items: center; gap: 0.7rem;
       background: #1DB954;
@@ -391,6 +393,23 @@
 
     .btn-spotify:hover { background: #1ed760; transform: translateY(-2px); }
     .btn-spotify svg { width: 20px; height: 20px; fill: var(--olive-dark); }
+
+    .btn-apple {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      background: var(--cream);
+      color: var(--olive-dark);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none;
+      padding: 1rem 2.2rem;
+      border-radius: 999px;
+      transition: transform 0.2s, background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .btn-apple:hover { background: var(--gold); transform: translateY(-2px); }
+    .btn-apple svg { width: 20px; height: 20px; fill: var(--olive-dark); }
 
     /* ── CTA ── */
     .cta-section { background: var(--cream-warm); padding: 6rem; text-align: center; }
@@ -489,6 +508,7 @@
       .reviews-grid { grid-template-columns: 1fr; }
       .podcast { padding: 4rem 2rem; flex-direction: column; text-align: center; align-items: center; }
       .podcast-text { text-align: center; }
+      .podcast-buttons { justify-content: center; }
       .cta-section { padding: 4rem 2rem; }
       footer { flex-direction: column; gap: 1rem; padding: 2rem; text-align: center; }
     }
@@ -656,13 +676,19 @@
 <section class="podcast" id="podcast">
   <div class="podcast-text">
     <p class="section-label">Le podcast du cabinet</p>
-    <h2 class="section-title">Mon Corps Est Un Trésor</h2>
+    <h2 class="section-title"><em>Mon Corps Est Un Trésor</em></h2>
     <p class="podcast-sub">Quelques éléments sur la performance, la santé et le mouvement convertis en podcast, à écouter sans modération.</p>
   </div>
-  <a class="btn-spotify" href="https://open.spotify.com/show/1zqzVpo3P5uRbv8AiAiDcP?si=e3012b38e3034592" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 17.34c-.24.36-.66.48-1.02.24-2.82-1.68-6.36-2.10-10.56-1.14-.42.12-.78-.18-.9-.54-.12-.42.18-.78.54-.9 4.56-1.02 8.52-.6 11.64 1.32.42.18.48.66.3 1.02zm1.44-3.3c-.3.42-.84.6-1.26.3-3.24-1.98-8.16-2.58-11.94-1.38-.48.12-1.02-.12-1.14-.6-.12-.48.12-1.02.6-1.14 4.38-1.32 9.78-.66 13.5 1.62.36.18.54.78.24 1.2zm.12-3.42C15.3 8.28 8.76 8.04 5.04 9.18c-.6.18-1.2-.18-1.38-.72-.18-.6.18-1.2.72-1.38 4.32-1.32 11.52-1.02 15.84 1.5.54.3.72 1.02.42 1.56-.3.42-1.02.6-1.56.3z"/></svg>
-    Écouter sur Spotify
-  </a>
+  <div class="podcast-buttons">
+    <a class="btn-spotify" href="https://open.spotify.com/show/1zqzVpo3P5uRbv8AiAiDcP?si=e3012b38e3034592" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 17.34c-.24.36-.66.48-1.02.24-2.82-1.68-6.36-2.10-10.56-1.14-.42.12-.78-.18-.9-.54-.12-.42.18-.78.54-.9 4.56-1.02 8.52-.6 11.64 1.32.42.18.48.66.3 1.02zm1.44-3.3c-.3.42-.84.6-1.26.3-3.24-1.98-8.16-2.58-11.94-1.38-.48.12-1.02-.12-1.14-.6-.12-.48.12-1.02.6-1.14 4.38-1.32 9.78-.66 13.5 1.62.36.18.54.78.24 1.2zm.12-3.42C15.3 8.28 8.76 8.04 5.04 9.18c-.6.18-1.2-.18-1.38-.72-.18-.6.18-1.2.72-1.38 4.32-1.32 11.52-1.02 15.84 1.5.54.3.72 1.02.42 1.56-.3.42-1.02.6-1.56.3z"/></svg>
+      Écouter sur Spotify
+    </a>
+    <a class="btn-apple" href="https://podcasts.apple.com/fr/podcast/mon-corps-est-un-tr%C3%A9sor/id1859935000" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.8c2.87 0 5.2 2.33 5.2 5.2 0 1.99-1.12 3.72-2.77 4.59.03.22.05.44.05.67 0 2.65-1.98 4.84-4.48 5.15v-2.02c1.39-.3 2.43-1.54 2.43-3.02 0-.13-.01-.26-.03-.39-.98.5-2.09.79-3.27.79-1.18 0-2.29-.29-3.27-.79-.02.13-.03.26-.03.39 0 1.48 1.04 2.72 2.43 3.02v2.02c-2.5-.31-4.48-2.5-4.48-5.15 0-.23.02-.45.05-.67C4.92 13.72 3.8 11.99 3.8 10c0-2.87 2.33-5.2 5.2-5.2h3zm-1.5 2.6a2.6 2.6 0 100 5.2 2.6 2.6 0 000-5.2z"/></svg>
+      Écouter sur Apple Podcasts
+    </a>
+  </div>
 </section>
 
 <!-- CTA -->
