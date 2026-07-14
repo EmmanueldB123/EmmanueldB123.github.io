@@ -114,6 +114,18 @@
       padding-top: 64px;
     }
 
+    .hero-logo-wrap {
+      display: flex;
+      justify-content: center;
+      padding-top: 2.2rem;
+    }
+
+    .hero-logo {
+      height: 110px;
+      width: auto;
+      display: block;
+    }
+
     .hero-eyebrow-top {
       font-family: var(--font-body);
       font-size: 0.7rem;
@@ -503,6 +515,8 @@
 
       .hero { padding-top: 92px; }
       .hero-banner { object-position: top center; }
+      .hero-logo-wrap { padding-top: 1.6rem; }
+      .hero-logo { height: 80px; }
 
       .hero-text { padding: 2.5rem 2rem; align-items: flex-start; text-align: left; }
       .hero-triad { justify-content: flex-start; }
@@ -524,6 +538,7 @@
       nav { padding: 0.8rem 1rem; }
       .nav-logo { font-size: 1rem; }
       .nav-signature { height: 46px; }
+      .hero-logo { height: 64px; }
     }
 
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -552,6 +567,9 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-logo-wrap">
+    <img class="hero-logo" src="BlasonFamille_Transparent.png" alt="Blason de la famille de Bellefon" />
+  </div>
   <p class="hero-eyebrow-top">Formations · Santé · Performance</p>
   <img class="hero-banner" src="GHCover.png" alt="Académie de Bellefon" />
   <div class="hero-text">
