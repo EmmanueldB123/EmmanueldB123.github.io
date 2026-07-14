@@ -147,16 +147,11 @@
 
     .hero-text {
       padding: 3.5rem 6rem;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
     }
-    .hero-title-row{
-      display:flex;
-      align-items:center;
-      gap:2rem;
-      margin-bottom:1.5rem;
-    }
-    .hero-title-block{text-align:left;}
-    .hero-body{text-align:left;max-width:440px;}
-
 
     .hero-eyebrow {
       font-family: var(--font-body);
@@ -523,11 +518,8 @@
       .hero-logo-wrap { padding-top: 0.8rem; }
       .hero-logo { height: 150px; }
 
-      .hero-text { padding: 2.5rem 2rem; }
-      .hero-title-row{gap:1rem;}
-      .hero-logo{height:120px;}
-      .hero-body{max-width:none;}
-      .hero-triad { justify-content:flex-start; }
+      .hero-text { padding: 2.5rem 2rem; align-items: flex-start; text-align: left; }
+      .hero-triad { justify-content: flex-start; }
 
       .section { padding: 4rem 2rem; }
       .identity-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -547,7 +539,7 @@
       #avis,
       #podcast,
       #rdv {
-      scroll-margin-top: 90px;
+      scroll-margin-top: 110px;
       }
       
     }
@@ -586,19 +578,26 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-logo-wrap">
+    <img class="hero-logo" src="BlasonFamille_Transparent.png" alt="Blason de la famille de Bellefon" />
+  </div>
   <p class="hero-eyebrow-top">Formations · Santé · Performance</p>
   <img class="hero-banner" src="GHCover.png" alt="Académie de Bellefon" />
   <div class="hero-text">
-    <div class="hero-title-row">
-      <img class="hero-logo" src="BlasonFamille_Transparent.png" alt="Blason de la famille de Bellefon" />
-      <div class="hero-title-block">
-        <h1 class="hero-title">Académie<br><em>de Bellefon</em></h1>
-      </div>
-    </div>
-    <div class="hero-body">
-      <p class="hero-sub">Un lieu où l'ostéopathie et le coaching redonnent au mouvement toute sa place.</p>
-      <a class="hero-triad" href="#identite"><span class="triad-word">Action</span><span class="triad-sep">·</span><span class="triad-word">Alignement</span><span class="triad-sep">·</span><span class="triad-word">Activation</span></a>
-    </div>
+    <h1 class="hero-title">
+      Académie<br>
+      <em>de Bellefon</em>
+    </h1>
+    <p class="hero-sub">
+      Un lieu où l'ostéopathie et le coaching redonnent au mouvement toute sa place.
+    </p>
+    <a class="hero-triad" href="#identite">
+      <span class="triad-word">Action</span>
+      <span class="triad-sep">·</span>
+      <span class="triad-word">Alignement</span>
+      <span class="triad-sep">·</span>
+      <span class="triad-word">Activation</span>
+    </a>
   </div>
 </section>
 
