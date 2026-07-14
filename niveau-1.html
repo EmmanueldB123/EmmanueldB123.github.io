@@ -347,30 +347,8 @@
 
     /* ── NIVEAU SECTION (modules) ── */
     .niveau {
-      padding: 5.5rem 6rem;
+      padding: 3.5rem 6rem 5.5rem;
       border-top: 1px solid rgba(61,74,46,0.08);
-    }
-
-    .niveau-header {
-      display: flex;
-      align-items: baseline;
-      gap: 1.2rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .niveau-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 2.2vw, 2rem);
-      font-weight: 300;
-      color: var(--olive-dark);
-    }
-
-    .niveau-rule {
-      height: 2px;
-      width: 100%;
-      background: var(--niveau-color);
-      opacity: 0.25;
-      margin: 1.6rem 0 3rem;
     }
 
     .formations-grid {
@@ -573,7 +551,6 @@
       .timeline-connector { width: auto; height: 1.6rem; transform: rotate(90deg); }
 
       .niveau { padding: 3.5rem 1.5rem; }
-      .niveau-header { flex-direction: column; gap: 0.4rem; }
       .formations-grid { grid-template-columns: 1fr; }
 
       .niveau-hero-header { flex-direction: column; gap: 0.5rem; }
@@ -637,7 +614,6 @@
 
 <!-- MODULES -->
 <section class="niveau" style="--niveau-color: var(--lvl1)">
-  <div class="niveau-rule"></div>
   <div class="formations-grid">
     <div class="formation-card">
       <span class="formation-tag">Fondamentaux</span>
