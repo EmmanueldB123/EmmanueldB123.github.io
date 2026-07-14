@@ -156,12 +156,10 @@
     /* ── PROGRESSION RAIL ── */
     .progression-rail {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      row-gap: 0.6rem;
-      column-gap: 1.7rem;
-      margin-top: 3.5rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.55rem;
+      margin-top: 0.5rem;
     }
 
     .rail-step {
@@ -307,12 +305,20 @@
 
     .breadcrumb a:hover { color: var(--gold); }
 
+    .niveau-hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
     .niveau-hero-header {
       display: flex;
       align-items: baseline;
       gap: 1.4rem;
-      max-width: 1100px;
-      margin: 0 auto 1rem;
     }
 
     .niveau-hero-num {
@@ -341,30 +347,8 @@
 
     /* ── NIVEAU SECTION (modules) ── */
     .niveau {
-      padding: 5.5rem 6rem;
+      padding: 3.5rem 6rem 5.5rem;
       border-top: 1px solid rgba(61,74,46,0.08);
-    }
-
-    .niveau-header {
-      display: flex;
-      align-items: baseline;
-      gap: 1.2rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .niveau-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 2.2vw, 2rem);
-      font-weight: 300;
-      color: var(--olive-dark);
-    }
-
-    .niveau-rule {
-      height: 2px;
-      width: 100%;
-      background: var(--niveau-color);
-      opacity: 0.25;
-      margin: 1.6rem 0 3rem;
     }
 
     .formations-grid {
@@ -559,14 +543,14 @@
 
       .hero-formations { padding: 5.75rem 1.5rem 3.5rem; }
       .niveau-hero { padding: 5.75rem 1.5rem 3rem; }
-      .progression-rail { flex-direction: column; align-items: center; row-gap: 0.7rem; column-gap: 0; }
+      .niveau-hero-top { flex-direction: column; gap: 0; }
+      .progression-rail { flex-direction: column; align-items: center; row-gap: 0.7rem; column-gap: 0; margin-top: 3.5rem; }
 
       .niveaux-section { padding: 3.5rem 1.5rem; }
       .niveaux-timeline { flex-direction: column; }
       .timeline-connector { width: auto; height: 1.6rem; transform: rotate(90deg); }
 
       .niveau { padding: 3.5rem 1.5rem; }
-      .niveau-header { flex-direction: column; gap: 0.4rem; }
       .formations-grid { grid-template-columns: 1fr; }
 
       .niveau-hero-header { flex-direction: column; gap: 0.5rem; }
@@ -610,6 +594,7 @@
 <!-- HERO NIVEAU -->
 <section class="niveau-hero" style="--niveau-color: var(--lvl3)">
   <p class="breadcrumb"><a href="formations.html">← Retour aux formations</a></p>
+  <div class="niveau-hero-top">
   <div class="niveau-hero-header">
     <span class="niveau-hero-num">03</span>
     <div class="niveau-hero-titles">
@@ -624,11 +609,11 @@
     <a class="rail-step" href="niveau-4.html"><span class="rail-dot" style="background:var(--lvl4)"></span>Niveau 4 · Expert du Mouvement</a>
     <a class="rail-step" href="niveau-5.html"><span class="rail-dot" style="background:var(--lvl5)"></span>Niveau 5 · Professionnel</a>
   </div>
+  </div>
 </section>
 
 <!-- MODULES -->
 <section class="niveau" style="--niveau-color: var(--lvl3)">
-  <div class="niveau-rule"></div>
   <div class="formations-grid">
     <div class="formation-card">
       <span class="formation-tag">Intermédiaire</span>
