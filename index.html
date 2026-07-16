@@ -2,6 +2,14 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    (function () {
+      if (window.location.hash) {
+        window.__pendingHash = window.location.hash.slice(1);
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Académie de Bellefon — Performance & Santé </title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -61,10 +69,15 @@
     .nav-logo-line + .nav-logo-line { margin-left: 0.3em; }
 
     .nav-signature {
+      display: inline-flex;
+      align-items: center;
+      margin-left: -10rem;
+    }
+
+    .nav-signature-img {
       height: 48px;
       opacity: 0.7;
       filter: brightness(1.4);
-      margin-left: -10rem;
     }
 
     .nav-links {
@@ -230,7 +243,7 @@
     }
 
     /* ── SECTION IDENTITÉ ── */
-    .section { padding: 7rem 6rem; }
+    .section { padding: 5rem 6rem 7rem; }
 
     .section-label {
       font-size: 0.65rem;
@@ -276,7 +289,7 @@
     .value-desc { font-size: 0.82rem; color: #6a6a55; letter-spacing: 0.02em; }
 
     /* ── PRATICIENS ── */
-    .praticiens { background: var(--olive-dark); padding: 7rem 6rem; }
+    .praticiens { background: var(--olive-dark); padding: 5rem 6rem 7rem; }
     .praticiens .section-title { color: var(--cream); }
 
     .praticiens-grid {
@@ -336,7 +349,7 @@
     .btn-doctolib svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
 
     /* ── AVIS GOOGLE ── */
-    .reviews { background: var(--cream-warm); padding: 7rem 6rem; }
+    .reviews { background: var(--cream-warm); padding: 5rem 6rem 7rem; }
 
     .reviews-grid {
       display: grid;
@@ -397,7 +410,7 @@
     /* ── PODCAST ── */
     .podcast {
       background: var(--olive-dark);
-      padding: 6rem;
+      padding: 4rem 6rem 6rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -447,7 +460,7 @@
     .btn-apple svg { width: 20px; height: 20px; fill: var(--olive-dark); }
 
     /* ── CTA ── */
-    .cta-section { background: var(--cream-warm); padding: 6rem; text-align: center; }
+    .cta-section { background: var(--cream-warm); padding: 4rem 6rem 6rem; text-align: center; }
     .cta-section .section-title { max-width: 600px; margin: 0 auto 1.5rem; }
     .cta-sub { font-size: 0.9rem; color: #6a6a55; margin-bottom: 3rem; }
     .cta-buttons { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
@@ -495,9 +508,11 @@
       }
       .nav-logo-line + .nav-logo-line { margin-left: 0; }
       .nav-signature {
-        height: 110px;
         margin-left: 0;
         order: 2;
+      }
+      .nav-signature-img {
+        height: 110px;
       }
       .nav-toggle-label { display: flex; order: 3; }
 
@@ -537,16 +552,16 @@
       .hero-text { padding: 2.5rem 2rem; align-items: flex-start; text-align: left; }
       .hero-triad { justify-content: flex-start; }
 
-      .section { padding: 4rem 2rem; }
+      .section { padding: 2.75rem 2rem 4rem; }
       .identity-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .praticiens { padding: 4rem 2rem; }
+      .praticiens { padding: 2.75rem 2rem 4rem; }
       .praticiens-grid { grid-template-columns: 1fr; }
-      .reviews { padding: 4rem 2rem; }
+      .reviews { padding: 2.75rem 2rem 4rem; }
       .reviews-grid { grid-template-columns: 1fr; }
-      .podcast { padding: 4rem 2rem; flex-direction: column; text-align: center; align-items: center; }
+      .podcast { padding: 2.75rem 2rem 4rem; flex-direction: column; text-align: center; align-items: center; }
       .podcast-text { text-align: center; }
       .podcast-buttons { justify-content: center; }
-      .cta-section { padding: 4rem 2rem; }
+      .cta-section { padding: 2.75rem 2rem 4rem; }
       footer { flex-direction: column; gap: 1rem; padding: 2rem; text-align: center; }
 
       /* Pour que le bandeau ne masque par le haut des sections quand on va dessus */
@@ -564,7 +579,7 @@
     @media (max-width: 640px) {
       nav { padding: 0.8rem 1rem; }
       .nav-logo { font-size: 1rem; }
-      .nav-signature { height: 46px; }
+      .nav-signature-img { height: 46px; }
       .hero-logo { height: 280px; }
     }
 
@@ -576,7 +591,7 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#"><span class="nav-logo-line">Académie</span><span class="nav-logo-line">de Bellefon</span></a>
-  <img class="nav-signature" src="signature_Transparent.png" alt="Signature E. de Bellefon" />
+  <a class="nav-signature" href="index.html" aria-label="Retour à l'accueil"><img class="nav-signature-img" src="signature_Transparent.png" alt="Signature E. de Bellefon" /></a>
   <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" />
   <label for="nav-toggle" class="nav-toggle-label" aria-label="Ouvrir le menu">
     <span></span>
@@ -760,6 +775,54 @@
   <span class="footer-logo"> Étretat . Paris . Nice </span>
   <span class="footer-copy">© 2026 · Tous droits réservés</span>
 </footer>
+
+<script>
+  (function () {
+    function navOffset() {
+      var nav = document.querySelector('nav');
+      return nav ? nav.getBoundingClientRect().height : 0;
+    }
+
+    function scrollToId(id, behavior) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var top = el.getBoundingClientRect().top + window.pageYOffset - navOffset();
+      window.scrollTo({ top: top, behavior: behavior || 'smooth' });
+    }
+
+    // Intercepte les clics vers une ancre de cette même page pour tenir compte
+    // de la hauteur réelle (variable) du bandeau fixe.
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a[href*="#"]');
+      if (!link) return;
+
+      var href = link.getAttribute('href');
+      var hashPos = href.indexOf('#');
+      var id = href.slice(hashPos + 1);
+      if (!id) return;
+
+      var pathPart = href.slice(0, hashPos);
+      var isSamePage = pathPart === '' || pathPart === 'index.html' || pathPart.endsWith('/index.html');
+      if (!isSamePage) return;
+
+      var el = document.getElementById(id);
+      if (!el) return;
+
+      e.preventDefault();
+      scrollToId(id);
+      history.replaceState(null, '', '#' + id);
+    });
+
+    // Arrivée sur la page avec une ancre (depuis une autre page, ou lien direct) :
+    // on attend que la mise en page soit stable puis on cale précisément.
+    window.addEventListener('load', function () {
+      if (window.__pendingHash) {
+        scrollToId(window.__pendingHash, 'auto');
+        history.replaceState(null, '', '#' + window.__pendingHash);
+      }
+    });
+  })();
+</script>
 
 </body>
 </html>
