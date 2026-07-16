@@ -68,10 +68,15 @@
     .nav-logo-line + .nav-logo-line { margin-left: 0.3em; }
 
     .nav-signature {
+      display: inline-flex;
+      align-items: center;
+      margin-left: -10rem;
+    }
+
+    .nav-signature-img {
       height: 48px;
       opacity: 0.7;
       filter: brightness(1.4);
-      margin-left: -10rem;
     }
 
     .nav-links {
@@ -285,6 +290,7 @@
 
     /* ── NIVEAU DETAIL PAGE ── */
     .niveau-hero {
+      cursor: pointer;
       background: var(--olive-dark);
       padding-top: 3.5rem;
     }
@@ -374,11 +380,7 @@
       border-top: 1px solid rgba(61,74,46,0.08);
     }
 
-    .formations-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.2rem;
-    }
+
 
     .formation-card {
       background: var(--white);
@@ -530,9 +532,11 @@
       }
       .nav-logo-line + .nav-logo-line { margin-left: 0; }
       .nav-signature {
-        height: 52px;
         margin-left: 0;
         order: 2;
+      }
+      .nav-signature-img {
+        height: 52px;
       }
       .nav-toggle-label { display: flex; order: 3; }
 
@@ -576,6 +580,7 @@
       .timeline-connector { width: auto; height: 1.6rem; transform: rotate(90deg); }
 
       .niveau { padding: 3.5rem 1.5rem; }
+      #modules { scroll-margin-top: 64px; }
       .formations-grid { grid-template-columns: 1fr; }
 
       .niveau-hero-header { gap: 1rem; }
@@ -589,7 +594,7 @@
     @media (max-width: 640px) {
       nav { padding: 0.8rem 1rem; }
       .nav-logo { font-size: 1rem; }
-      .nav-signature { height: 46px; }
+      .nav-signature-img { height: 46px; }
     }
 
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -600,7 +605,7 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="index.html"><span class="nav-logo-line">Académie</span><span class="nav-logo-line">de Bellefon</span></a>
-  <img class="nav-signature" src="signature_Transparent.png" alt="Signature E. de Bellefon" />
+  <a class="nav-signature" href="index.html" aria-label="Retour à l'accueil"><img class="nav-signature-img" src="signature_Transparent.png" alt="Signature E. de Bellefon" /></a>
   <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" />
   <label for="nav-toggle" class="nav-toggle-label" aria-label="Ouvrir le menu">
     <span></span>
@@ -617,7 +622,7 @@
 </nav>
 
 <!-- HERO NIVEAU -->
-<section class="niveau-hero" style="--niveau-color: var(--lvl3)">
+<section class="niveau-hero" onclick="if(!event.target.closest('a')){document.getElementById('modules').scrollIntoView({behavior:'smooth'});}" style="--niveau-color: var(--lvl3)">
   <div class="niveau-hero-inner">
   <p class="breadcrumb"><a href="formations.html">← Retour aux formations</a></p>
   <div class="niveau-hero-top">
@@ -641,7 +646,7 @@
 </section>
 
 <!-- MODULES -->
-<section class="niveau" style="--niveau-color: var(--lvl3)">
+<section class="niveau" id="modules" style="--niveau-color: var(--lvl3)">
   <div class="formations-grid">
     <div class="formation-card">
       <span class="formation-tag">Intermédiaire</span>
