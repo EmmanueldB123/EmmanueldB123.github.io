@@ -622,7 +622,7 @@
 </nav>
 
 <!-- HERO NIVEAU -->
-<section class="niveau-hero" onclick="if(!event.target.closest('a')){document.getElementById('modules').scrollIntoView({behavior:'smooth'});}" style="--niveau-color: var(--lvl1)">
+<section class="niveau-hero" onclick="scrollToModules(event)" style="--niveau-color: var(--lvl1)">
   <div class="niveau-hero-inner">
   <p class="breadcrumb"><a href="formations.html">← Retour aux formations</a></p>
   <div class="niveau-hero-top">
@@ -703,6 +703,18 @@
   <span class="footer-logo"> Étretat . Paris . Nice </span>
   <span class="footer-copy">© 2026 · Tous droits réservés</span>
 </footer>
+
+<script>
+  function scrollToModules(e) {
+    if (e.target.closest('a')) return;
+    var nav = document.querySelector('nav');
+    var modules = document.getElementById('modules');
+    if (!modules) return;
+    var offset = nav ? nav.getBoundingClientRect().height : 0;
+    var top = modules.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+</script>
 
 </body>
 </html>
