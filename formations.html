@@ -625,11 +625,13 @@
       display: block;
     }
 
-    .niveau-tile:hover .niveau-tile-content {
+    .niveau-tile:hover .niveau-tile-content,
+    .niveau-tile.is-active .niveau-tile-content {
       opacity: 0;
     }
 
-    .niveau-tile:hover .niveau-tile-photo {
+    .niveau-tile:hover .niveau-tile-photo,
+    .niveau-tile.is-active .niveau-tile-photo {
       opacity: 1;
     }
   </style>
@@ -719,6 +721,32 @@
   <span class="footer-logo"> Étretat . Paris . Nice </span>
   <span class="footer-copy">© 2026 · Tous droits réservés</span>
 </footer>
+
+<script>
+  (function () {
+    var isTouch = window.matchMedia('(hover: none)').matches;
+    if (!isTouch) return;
+
+    var tiles = document.querySelectorAll('.niveau-tile');
+
+    tiles.forEach(function (tile) {
+      tile.addEventListener('click', function (e) {
+        if (!tile.classList.contains('is-active')) {
+          e.preventDefault();
+          tiles.forEach(function (t) { t.classList.remove('is-active'); });
+          tile.classList.add('is-active');
+        }
+        // sinon : la tuile est déjà active → le lien suit son cours normalement
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.niveau-tile')) {
+        tiles.forEach(function (t) { t.classList.remove('is-active'); });
+      }
+    });
+  })();
+</script>
 
 </body>
 </html>
