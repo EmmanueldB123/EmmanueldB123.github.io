@@ -619,11 +619,8 @@
     <span></span>
   </label>
   <ul class="nav-links">
-    <li><a href="index.html#rdv">Prendre RDV</a></li>
     <li><a href="formations.html" class="active">Formations</a></li>
-    <li><a href="index.html#identite">Le cabinet</a></li>
-    <li><a href="index.html#praticiens">Praticiens</a></li>
-    <li><a href="index.html#avis">Avis</a></li>
+    <li><a href="index.html#rdv">Prendre RDV</a></li>
   </ul>
 </nav>
 
@@ -711,6 +708,23 @@
 </footer>
 
 <script>
+  (function () {
+    var toggle = document.getElementById('nav-toggle');
+    var nav = document.querySelector('nav');
+    if (!toggle || !nav) return;
+
+    nav.querySelectorAll('.nav-links a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        toggle.checked = false;
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (toggle.checked && !nav.contains(e.target)) {
+        toggle.checked = false;
+      }
+    });
+  })();
   function scrollToModules(e) {
     if (e.target.closest('a')) return;
     var nav = document.querySelector('nav');
