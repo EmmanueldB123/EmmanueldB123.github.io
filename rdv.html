@@ -273,6 +273,12 @@
     .btn-doctolib:hover { background: var(--gold); color: var(--olive-dark); }
     .btn-doctolib svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
 
+    /* ── COACHING (section de même niveau que l'ostéopathie) ── */
+    .coaching-section { background: var(--white); text-align: center; }
+    .coaching-section .section-label { justify-content: center; display: flex; }
+    .coaching-section .section-title { max-width: 640px; margin-left: auto; margin-right: auto; }
+    .coaching-section .section-intro { margin-left: auto; margin-right: auto; text-align: center; }
+
     /* ── ADRESSE ── */
     .address-section {
       background: var(--cream-warm);
@@ -620,6 +626,14 @@
   </div>
 </section>
 
+<!-- COACHING -->
+<section class="section coaching-section" id="coaching">
+  <p class="section-label">Coaching</p>
+  <h2 class="section-title">Un accompagnement sur mesure</h2>
+  <p class="section-intro">Le coaching se construit individuellement, par téléphone, pour cerner précisément votre objectif avant de démarrer l'accompagnement.</p>
+  <button type="button" class="btn-coaching js-open-coaching">Je commence mon coaching</button>
+</section>
+
 <!-- ADRESSE -->
 <section class="address-section" id="adresse">
   <div class="address-text">
@@ -649,12 +663,12 @@
   </div>
 </section>
 
-<!-- COACHING CTA -->
-<section class="coaching-cta" id="coaching">
+<!-- CTA FINALE -->
+<section class="coaching-cta" id="contact">
   <p class="section-label">Coaching</p>
-  <h2 class="section-title">Envie d'aller plus loin ?</h2>
+  <h2 class="section-title">Encore des questions ?</h2>
   <p class="section-intro">Le coaching se construit sur mesure, par téléphone, pour cerner précisément votre objectif avant de démarrer l'accompagnement.</p>
-  <button type="button" class="btn-coaching" id="open-coaching-modal">Je commence mon coaching</button>
+  <button type="button" class="btn-coaching js-open-coaching">Je commence mon coaching</button>
 </section>
 
 <!-- FOOTER -->
@@ -698,10 +712,10 @@
   })();
 
   (function () {
-    var openBtn = document.getElementById('open-coaching-modal');
+    var openBtns = document.querySelectorAll('.js-open-coaching');
     var closeBtn = document.getElementById('close-coaching-modal');
     var overlay = document.getElementById('coaching-modal');
-    if (!openBtn || !overlay) return;
+    if (!openBtns.length || !overlay) return;
 
     function openModal() {
       overlay.classList.add('open');
@@ -713,7 +727,9 @@
       document.body.style.overflow = '';
     }
 
-    openBtn.addEventListener('click', openModal);
+    openBtns.forEach(function (btn) {
+      btn.addEventListener('click', openModal);
+    });
     closeBtn.addEventListener('click', closeModal);
 
     overlay.addEventListener('click', function (e) {
