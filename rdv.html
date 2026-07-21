@@ -2,8 +2,16 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    (function () {
+      if (window.location.hash) {
+        window.__pendingHash = window.location.hash.slice(1);
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Formations — Académie de Bellefon</title>
+  <title>Prendre rendez-vous — Académie de Bellefon</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -19,13 +27,6 @@
       --white:       #ffffff;
       --gold:        #b8a97a;
       --text-light:  #d4cfc5;
-
-      /* Couleurs de niveau, dans l'esprit de l'échelle de progression */
-      --lvl1: #3f8f86;
-      --lvl2: #c99a3f;
-      --lvl3: #c9713f;
-      --lvl4: #a83a55;
-      --lvl5: #000000;
 
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-body:    'Inter', system-ui, sans-serif;
@@ -94,7 +95,7 @@
       transition: color 0.2s;
     }
 
-    .nav-links a:hover { color: var(--cream); }
+    .nav-links a:hover,
     .nav-links a.active { color: var(--gold); }
 
     /* ── HAMBURGER (mobile only, hidden by default) ── */
@@ -120,498 +121,99 @@
       transition: transform 0.25s ease, opacity 0.2s ease;
     }
 
-    /* ── HERO ── */
-    .hero-formations {
+    /* ── PAGE HEADER ── */
+    .page-header {
       background: var(--olive-dark);
-      padding: 8rem 6rem 6rem;
+      padding: 10rem 6rem 4.5rem;
       text-align: center;
-      cursor: pointer;
     }
 
-    .hero-eyebrow-top {
-      font-size: 0.7rem;
-      letter-spacing: 0.22em;
+    .page-header .section-label {
+      color: var(--gold);
+      justify-content: center;
+      display: flex;
+    }
+
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      font-weight: 300;
+      color: var(--cream);
+      margin: 0.6rem 0 1rem;
+    }
+
+    .page-header h1 em { font-style: italic; color: var(--gold); }
+
+    .page-header p {
+      font-size: 0.92rem;
+      color: var(--text-light);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── SECTION GÉNÉRIQUE ── */
+    .section { padding: 5rem 6rem; }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--olive-dark);
       margin-bottom: 1.2rem;
     }
 
-    .hero-formations-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.4rem, 4.5vw, 4.2rem);
-      font-weight: 300;
-      color: var(--cream);
-      line-height: 1.1;
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-formations-title em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .hero-formations-sub {
-      font-size: 0.95rem;
-      font-weight: 300;
-      color: var(--text-light);
-      max-width: 600px;
-      margin: 0 auto;
+    .section-intro {
+      font-size: 0.92rem;
+      color: #6a6a55;
+      max-width: 640px;
+      margin-bottom: 3rem;
       line-height: 1.8;
     }
 
-    /* ── PROGRESSION RAIL ── */
-    .progression-rail {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      row-gap: 0.6rem;
-      column-gap: 1.7rem;
-      margin-top: 3.5rem;
-      flex-wrap: wrap;
-    }
+    /* ── OPTIONS DE RDV ── */
+    .options { background: var(--cream); }
 
-    .rail-step {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.4rem 0;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--cream);
-      opacity: 0.55;
-      text-decoration: none;
-      transition: opacity 0.2s;
-      background: none;
-      border: none;
-    }
-
-    .rail-step:hover { opacity: 1; }
-    .rail-step.active { opacity: 1; color: var(--gold); }
-
-    .rail-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-
-    /* ── NIVEAUX : SELECTION (page formations) ── */
-    .niveaux-section {
-      padding: 5.5rem 6rem 6rem;
-    }
-
-    .niveaux-intro {
-      text-align: center;
-      max-width: 640px;
-      margin: 0 auto 3.5rem;
-    }
-
-    .niveaux-intro p {
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--olive-mid);
-    }
-
-    .niveaux-timeline {
-      display: flex;
-      align-items: stretch;
-      gap: 0;
-    }
-
-    .niveau-tile {
-      flex: 1;
-      background: var(--white);
-      border: 1px solid rgba(61,74,46,0.1);
-      border-top: 3px solid var(--niveau-color);
-      padding: 2.4rem 1.7rem 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      text-decoration: none;
-      color: inherit;
-      position: relative;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-
-    .niveau-tile:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 14px 30px rgba(43,51,32,0.12);
-    }
-
-    .niveau-tile-num {
-      font-family: var(--font-display);
-      font-size: 2.4rem;
-      font-weight: 600;
-      line-height: 1;
-      color: var(--niveau-color);
-    }
-
-    .niveau-tile h3 {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--niveau-color);
-      line-height: 1.1;
-    }
-
-    .niveau-tile p {
-      font-size: 0.78rem;
-      color: #6a6a55;
-      line-height: 1.55;
-      flex: 1;
-    }
-
-    .niveau-tile-count {
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--niveau-color);
-    }
-
-    .niveau-tile-cta {
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--olive-dark);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-top: 0.2rem;
-    }
-
-    .niveau-tile-cta .arrow { transition: transform 0.2s; }
-    .niveau-tile:hover .niveau-tile-cta .arrow { transform: translateX(5px); }
-
-    .timeline-connector {
-      flex: 0 0 auto;
-      width: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--olive-mid);
-      opacity: 0.35;
-      font-size: 1.3rem;
-      font-family: var(--font-display);
-    }
-
-    /* ── NIVEAU DETAIL PAGE ── */
-    .niveau-hero {
-      background: var(--olive-dark);
-      padding: 3.5rem 6rem 4.5rem;
-    }
-
-    .breadcrumb {
-      max-width: 1100px;
-      margin: 0 auto 2rem;
-    }
-
-    .breadcrumb a {
-      font-size: 0.68rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .breadcrumb a:hover { color: var(--gold); }
-
-    .niveau-hero-header {
-      display: flex;
-      align-items: baseline;
-      gap: 1.4rem;
-      max-width: 1100px;
-      margin: 0 auto 1rem;
-    }
-
-    .niveau-hero-num {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 6vw, 5rem);
-      font-weight: 600;
-      line-height: 1;
-      color: var(--niveau-color);
-    }
-
-    .niveau-hero-titles h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.6rem, 5.5vw, 4.6rem);
-      font-weight: 600;
-      color: var(--niveau-color);
-      line-height: 1.05;
-    }
-
-    .niveau-hero-titles p {
-      font-size: 0.78rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--niveau-color);
-      margin-top: 0.4rem;
-    }
-
-    /* ── NIVEAU SECTION (modules) ── */
-    .niveau {
-      padding: 5.5rem 6rem;
-      border-top: 1px solid rgba(61,74,46,0.08);
-    }
-
-    .niveau-header {
-      display: flex;
-      align-items: baseline;
-      gap: 1.2rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .niveau-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 2.2vw, 2rem);
-      font-weight: 300;
-      color: var(--olive-dark);
-    }
-
-    .niveau-rule {
-      height: 2px;
-      width: 100%;
-      background: var(--niveau-color);
-      opacity: 0.25;
-      margin: 1.6rem 0 3rem;
-    }
-
-    .formations-grid {
+    .options-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2.2rem;
+      gap: 2rem;
     }
 
-    .formation-card {
+    .option-card {
       background: var(--white);
-      border: 1px solid rgba(61,74,46,0.1);
-      border-top: 3px solid var(--niveau-color);
-      padding: 2.2rem 2rem;
+      border: 1px solid rgba(61,74,46,0.12);
+      padding: 2.6rem 2.2rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-
-    .formation-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(43,51,32,0.1);
-    }
-
-    .formation-name {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: var(--olive-dark);
-      line-height: 1.2;
-    }
-
-    .formation-desc {
-      font-size: 0.85rem;
-      color: #6a6a55;
-      line-height: 1.65;
-      flex: 1;
-    }
-
-    .formation-tag {
-      align-self: flex-start;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--niveau-color);
-      border: 1px solid var(--niveau-color);
-      padding: 0.35rem 0.8rem;
-      opacity: 0.85;
-    }
-
-    /* ── NIVEAU PAGINATION ── */
-    .niveau-pagination {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 6rem 1rem;
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .niveau-pagination a {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      text-decoration: none;
-      padding: 1rem 1.4rem;
-      border: 1px solid rgba(61,74,46,0.14);
-      background: var(--white);
-      max-width: 320px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .niveau-pagination a:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 22px rgba(43,51,32,0.1);
-    }
-
-    .niveau-pagination .pag-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--olive-mid);
-    }
-
-    .niveau-pagination .pag-title {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--olive-dark);
-    }
-
-    .niveau-pagination .next { text-align: right; align-items: flex-end; margin-left: auto; }
-
-    /* ── CTA ── */
-    .cta-formations {
-      background: var(--cream-warm);
-      padding: 6rem;
-      text-align: center;
-    }
-
-    .cta-formations h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 300;
-      color: var(--olive-dark);
-      margin-bottom: 1.2rem;
-    }
-
-    .cta-formations p {
-      font-size: 0.9rem;
-      color: #6a6a55;
-      margin-bottom: 2.4rem;
-    }
-
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      background: var(--olive-dark); color: var(--cream);
-      font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
-      text-decoration: none; padding: 1rem 2.5rem;
-      transition: background 0.25s;
-      border: none; font-family: inherit; cursor: pointer;
-    }
-    .btn-primary:hover { background: var(--olive-mid); }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--olive-dark);
-      padding: 2.5rem 6rem;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-
-    .footer-logo {
-      font-family: var(--font-display);
-      font-size: 1rem; font-weight: 300; letter-spacing: 0.12em;
-      color: var(--cream); opacity: 0.7;
-      text-decoration: none;
-    }
-
-    .footer-copy { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--text-light); opacity: 0.5; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav {
-        position: fixed;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0.8rem;
-        padding: 0.9rem 1.2rem;
-      }
-      .nav-logo {
-        order: 1;
-        display: flex;
-        flex-direction: column;
-        font-size: 1.15rem;
-        line-height: 1.3;
-        letter-spacing: 0.14em;
-      }
-      .nav-logo-line + .nav-logo-line { margin-left: 0; }
-      .nav-signature {
-        margin-left: 0;
-        order: 2;
-      }
-      .nav-signature-img {
-        height: 52px;
-      }
-      .nav-toggle-label { display: flex; order: 3; }
-
-      .nav-links {
-        order: 4;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        gap: 0;
-        padding: 0.5rem 0 1.5rem;
-        background: var(--olive-dark);
-        box-shadow: 0 12px 20px rgba(0,0,0,0.25);
-      }
-      .nav-toggle-checkbox:checked ~ .nav-links { display: flex; }
-
-      .nav-links li { width: 100%; text-align: center; }
-      .nav-links a {
-        display: block;
-        padding: 0.9rem 1.5rem;
-        font-size: 0.75rem;
-      }
-
-      .nav-toggle-checkbox:checked ~ .nav-toggle-label span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-      .nav-toggle-checkbox:checked ~ .nav-toggle-label span:nth-child(2) { opacity: 0; }
-      .nav-toggle-checkbox:checked ~ .nav-toggle-label span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-      .hero-formations { padding: 5.75rem 1.5rem 3.5rem; }
-      .hero-formations-title span { display: block; }
-      .niveau-hero { padding: 5.75rem 1.5rem 3rem; }
-      .progression-rail { flex-direction: column; align-items: center; row-gap: 0.7rem; column-gap: 0; }
-
-      .niveaux-section { padding: 3.5rem 1.5rem; }
-      .niveaux-timeline { flex-direction: column; }
-      .timeline-connector { width: auto; height: 1.6rem; transform: rotate(90deg); }
-
-      .niveau { padding: 3.5rem 1.5rem; }
-      .niveau-header { flex-direction: column; gap: 0.4rem; }
-      .formations-grid { grid-template-columns: 1fr; }
-
-      .niveau-hero-header { flex-direction: column; gap: 0.5rem; }
-      .niveau-pagination { padding: 0 1.5rem 1rem; }
-      .niveau-pagination .next { margin-left: 0; text-align: left; align-items: flex-start; }
-
-      .cta-formations { padding: 3.5rem 1.5rem; }
-      .cta-formations-title span { display: block; }
-      footer { flex-direction: column; gap: 1rem; padding: 2rem; text-align: center; }
-    }
-
-    @media (max-width: 640px) {
-      nav { padding: 0.8rem 1rem; }
-      .nav-logo { font-size: 1rem; }
-      .nav-signature-img { height: 46px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-
-    /* ── PHOTO DANS LA TUILE AU SURVOL ── */
-    .niveau-tile {
+      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s;
       position: relative;
       overflow: hidden;
     }
 
-    .niveau-tile-content {
+    .option-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+
+    /* ── PHOTO DANS LA TUILE AU SURVOL ── */
+    .option-card-content {
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 1rem;
       height: 100%;
       transition: opacity 0.3s ease;
     }
 
-    .niveau-tile-photo {
+    .option-card-photo {
       position: absolute;
       inset: 0;
       opacity: 0;
@@ -619,30 +221,156 @@
       pointer-events: none;
     }
 
-    .niveau-tile-photo img {
+    .option-card-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .niveau-tile.is-active .niveau-tile-content {
-      opacity: 0;
-    }
-
-    .niveau-tile.is-active .niveau-tile-photo {
-      opacity: 1;
-    }
+    .option-card.is-active .option-card-content { opacity: 0; }
+    .option-card.is-active .option-card-photo { opacity: 1; }
 
     @media (hover: hover) and (pointer: fine) {
-      .niveau-tile:hover .niveau-tile-content {
-        opacity: 0;
-      }
-
-      .niveau-tile:hover .niveau-tile-photo {
-        opacity: 1;
-      }
+      .option-card:hover .option-card-content { opacity: 0; }
+      .option-card:hover .option-card-photo { opacity: 1; }
     }
+
+    .option-icon {
+      width: 40px; height: 40px;
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 1.4;
+    }
+
+    .option-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--olive-dark);
+    }
+
+    .option-desc { font-size: 0.85rem; color: #6a6a55; line-height: 1.7; flex: 1; }
+
+    .btn-doctolib {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-body);
+      font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.85rem 1.8rem;
+      transition: background 0.25s, color 0.25s;
+      white-space: nowrap;
+    }
+
+    .btn-doctolib:hover { background: var(--gold); color: var(--olive-dark); }
+    .btn-doctolib svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+
+    .modal-praticiens {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    .modal-praticiens .btn-doctolib {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* ── COACHING (section de même niveau que l'ostéopathie) ── */
+    .coaching-section { background: var(--white); }
+
+    /* ── ADRESSE ── */
+    .address-section {
+      background: var(--cream-warm);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+
+    .address-text {
+      padding: 5rem 6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .address-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-top: 1.6rem;
+    }
+
+    .address-line svg {
+      width: 22px; height: 22px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 1.4;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .address-line-text {
+      font-size: 0.95rem;
+      color: var(--olive-dark);
+      line-height: 1.7;
+    }
+
+    .address-line-text strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .address-map {
+      min-height: 380px;
+    }
+
+    .address-map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      filter: grayscale(0.15) contrast(1.05);
+    }
+
+    /* ── COACHING CTA ── */
+    .coaching-cta {
+      background: var(--olive-dark);
+      padding: 6rem;
+      text-align: center;
+    }
+
+    .coaching-cta .section-label { justify-content: center; display: flex; }
+    .coaching-cta .section-title { color: var(--cream); }
+    .coaching-cta .section-intro { color: var(--text-light); margin-left: auto; margin-right: auto; text-align: center; }
+
+    .btn-coaching {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: var(--gold);
+      color: var(--olive-dark);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1.1rem 2.6rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .btn-coaching:hover { background: var(--cream); transform: translateY(-2px); }
+
     /* ── MODAL POPUP ── */
     .modal-overlay {
       position: fixed;
@@ -733,6 +461,96 @@
 
     .modal-phone:hover { background: var(--olive-mid); }
     .modal-phone svg { width: 18px; height: 18px; fill: var(--gold); flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--olive-dark);
+      padding: 2.5rem 6rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1rem; font-weight: 300; letter-spacing: 0.12em;
+      color: var(--cream); opacity: 0.7;
+      text-decoration: none;
+    }
+
+    .footer-copy { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--text-light); opacity: 0.5; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav {
+        position: fixed;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.9rem 1.2rem;
+      }
+      .nav-logo {
+        order: 1;
+        display: flex;
+        flex-direction: column;
+        font-size: 1.15rem;
+        line-height: 1.3;
+        letter-spacing: 0.14em;
+      }
+      .nav-logo-line + .nav-logo-line { margin-left: 0; }
+      .nav-signature {
+        margin-left: 0;
+        order: 2;
+      }
+      .nav-signature-img {
+        height: 110px;
+      }
+      .nav-toggle-label { display: flex; order: 3; }
+
+      .nav-links {
+        order: 4;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 0;
+        padding: 0.5rem 0 1.5rem;
+        background: var(--olive-dark);
+        box-shadow: 0 12px 20px rgba(0,0,0,0.25);
+      }
+      .nav-toggle-checkbox:checked ~ .nav-links { display: flex; }
+
+      .nav-links li { width: 100%; text-align: center; }
+      .nav-links a {
+        display: block;
+        padding: 0.9rem 1.5rem;
+        font-size: 0.75rem;
+      }
+
+      .nav-toggle-checkbox:checked ~ .nav-toggle-label span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .nav-toggle-checkbox:checked ~ .nav-toggle-label span:nth-child(2) { opacity: 0; }
+      .nav-toggle-checkbox:checked ~ .nav-toggle-label span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      .page-header { padding: 8rem 2rem 3.5rem; }
+      .section { padding: 3.5rem 2rem; }
+      .options-grid { grid-template-columns: 1fr; }
+      .address-section { grid-template-columns: 1fr; }
+      .address-text { padding: 3.5rem 2rem; }
+      .address-map { min-height: 300px; }
+      .coaching-cta { padding: 3.5rem 2rem; }
+      footer { flex-direction: column; gap: 1rem; padding: 2rem; text-align: center; }
+      .modal-box { padding: 2.4rem 1.6rem; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0.8rem 1rem; }
+      .nav-logo { font-size: 1rem; }
+      .nav-signature-img { height: 46px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   </style>
 </head>
 <body>
@@ -748,68 +566,116 @@
     <span></span>
   </label>
   <ul class="nav-links">
-    <li><a href="formations.html" class="active">Formations</a></li>
-    <li><a href="rdv.html">Prendre RDV</a></li>
+    <li><a href="formations.html">Formations</a></li>
+    <li><a href="rdv.html" class="active">Prendre RDV</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero-formations" onclick="window.location.href='index.html'">
-  <p class="hero-eyebrow-top">Formations</p>
-  <h1 class="hero-formations-title">
-    <span>Votre Plan.</span>
-    <span>Votre Progression.</span>
-    <span>Votre Histoire.</span>
-  </h1>
-  <p class="hero-formations-sub">
-    De la mobilité fonctionnelle à l'expertise athlétique. Choisissez un plan pour atteindre l'exigence physique de vos projets. 
-  </p>
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <p class="section-label">Ostéopathie & Coaching</p>
+  <h1>Prendre <em>rendez-vous</em></h1>
+  <p>Ostéopathie ou coaching, choisissez la formule qui correspond à votre besoin du moment.</p>
 </section>
 
-<!-- NIVEAUX : sélection -->
-<section class="niveaux-section">
-  <div class="niveaux-timeline">
-    <a class="niveau-tile" href="mobilite.html" style="--niveau-color: var(--lvl1)">
-      <span class="niveau-tile-content">
-        <h3>Essentiel</h3>
-        <p>Le mouvement au service du confort. Soulager et prévenir les faux mouvements du quotidien. </p>
-        <span class="niveau-tile-count">6 modules</span>
-        <span class="niveau-tile-cta">Découvrir <span class="arrow">→</span></span>
+<!-- OPTIONS OSTÉOPATHIE -->
+<section class="section options" id="osteopathie">
+  <p class="section-label">Ostéopathie</p>
+  <h2 class="section-title">Vos options de consultation</h2>
+  <p class="section-intro">Quel que soit le motif de consultation : douleur aiguë ou chronique, préparation sportive, suivi post-traumatique ou un bilan complet. Une séance dure environ 45min.</p>
+
+  <div class="options-grid">
+    <div class="option-card">
+      <span class="option-card-content">
+        <svg class="option-icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="19" rx="2"/><rect x="9" y="1" width="6" height="4" rx="1"/><path d="M8 12l3 3 5-6"/></svg>
+        <div class="option-name">Bilan-Traitement</div>
+        <p class="option-desc">Séance adaptée à votre motif de consultation avec bilan complet. Un document Récap'Conseils vous est envoyé après la consultation pour vous accompagner encore après la séance.</p>
       </span>
-      <span class="niveau-tile-photo"><img src="mobilite-photo.png" alt="Mobilité" /></span>
-    </a>
-    <span class="timeline-connector" aria-hidden="true">›</span>
-    <a class="niveau-tile" href="efficacite.html" style="--niveau-color: var(--lvl3)">
-      <span class="niveau-tile-content">
-        <h3>Efficacité</h3>
-        <p>Le plaisir d'être à l'aise dans l'effort. La performance en toute confiance. </p>
-        <span class="niveau-tile-count">6 modules</span>
-        <span class="niveau-tile-cta">Découvrir <span class="arrow">→</span></span>
+      <span class="option-card-photo"><img src="bilan-traitement-photo.jpg" alt="Bilan-Traitement" /></span>
+    </div>
+    <div class="option-card">
+      <span class="option-card-content">
+        <svg class="option-icon" viewBox="0 0 24 24"><circle cx="10" cy="4" r="2"/><path d="M7.5 6.3c-1.8.9-2.6 2.9-2 4.9.5 1.7 1.8 2.8 1.8 2.8L6 21h4.2l.8-4.3c2.6.2 4.6-1.2 5-3.6.4-2.1-.6-4.1-2.5-5"/><circle cx="11.5" cy="11.5" r="1" style="fill:var(--gold);stroke:none"/></svg>
+        <div class="option-name">Périnatalité</div>
+        <p class="option-desc">La grossesse et le post-partum sont des périodes de vie très intenses. Nous vous accompagnons dans ces changements jusqu'à l'accouchement... et après, ainsi que votre enfant.</p>
       </span>
-      <span class="niveau-tile-photo"><img src="efficacite-photo.png" alt="Efficacité" /></span>
-    </a>
-    <span class="timeline-connector" aria-hidden="true">›</span>
-    <a class="niveau-tile" href="expertise.html" style="--niveau-color: var(--lvl5)">
-      <span class="niveau-tile-content">
-        <h3>Expertise</h3>
-        <p>Spécialisation & Polyvalence. Pour les athlètes pro et les esthètes en quête du beau geste.</p>
-        <span class="niveau-tile-count">6 modules</span>
-        <span class="niveau-tile-cta">Découvrir <span class="arrow">→</span></span>
+      <span class="option-card-photo"><img src="perinatalite-photo.jpg" alt="Périnatalité" /></span>
+    </div>
+    <div class="option-card">
+      <span class="option-card-content">
+        <svg class="option-icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <div class="option-name">Suivi Sportif</div>
+        <p class="option-desc">Nous vous accompagnons dans vos projets les plus fous. "When there is a will, there is a way"</p>
       </span>
-      <span class="niveau-tile-photo"><img src="expertise-photo.png" alt="Expertise" /></span>
-    </a>
+      <span class="option-card-photo"><img src="sportif-photo.jpg" alt="Suivi Sportif" /></span>
+    </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-formations">
-  <h2 class="cta-formations-title">
-    <span>Une progression,</span>
-    <span>un accompagnement</span>
-  </h2>
-  <p>Chaque formation est encadrée pour respecter votre niveau et vous faire progresser en toute sécurité.</p>
-  <button type="button" class="btn-primary js-open-contact">Nous contacter</button>
+<!-- COACHING -->
+<section class="section coaching-section" id="coaching">
+  <p class="section-label">Coaching</p>
+  <h2 class="section-title">Un accompagnement sur mesure</h2>
+  <p class="section-intro">Le coaching se construit individuellement pour cerner précisément votre objectif avant de démarrer l'aventure.</p>
+  <button type="button" class="btn-coaching js-open-coaching">Je commence mon coaching</button>
 </section>
+
+<!-- ADRESSE -->
+<section class="address-section" id="adresse">
+  <div class="address-text">
+    <p class="section-label">Le cabinet</p>
+    <div class="address-line">
+      <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.5-7-11.5A7 7 0 0112 2a7 7 0 017 7.5C19 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+      <div class="address-line-text">
+        <strong>159 rue Raymond Losserand</strong>
+        75014 Paris
+      </div>
+    </div>
+    <div class="address-line">
+      <svg viewBox="0 0 24 24"><path d="M12 21c-4.5-3-8-6.5-8-10.5A5.5 5.5 0 0112 6a5.5 5.5 0 018 4.5c0 4-3.5 7.5-8 10.5z"/></svg>
+      <div class="address-line-text">
+        Sur rendez-vous, du lundi au dimanche.
+      </div>
+    </div>
+  </div>
+  <div class="address-map">
+    <iframe
+      src="https://www.google.com/maps?q=159+rue+Raymond+Losserand+75014+Paris&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Localisation du cabinet — 159 rue Raymond Losserand, 75014 Paris">
+    </iframe>
+  </div>
+</section>
+
+<!-- CTA FINALE -->
+<section class="coaching-cta" id="contact">
+  <p class="section-label">Contact</p>
+  <h2 class="section-title">Encore des questions ?</h2>
+  <p class="section-intro">Contactez-nous pour en savoir davantage.</p>
+  <button type="button" class="btn-coaching js-open-contact">Contact</button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="index.html"> Académie de Bellefon </a>
+  <span class="footer-logo"> Étretat . Paris . Nice </span>
+  <span class="footer-copy">© 2026 · Tous droits réservés</span>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="coaching-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+    <button type="button" class="modal-close" id="close-coaching-modal" aria-label="Fermer">&times;</button>
+    <p class="modal-label">Coaching</p>
+    <h3 class="modal-title" id="modal-title">Commençons ensemble</h3>
+    <p class="modal-text">Pour démarrer votre coaching, appelez-nous directement : nous prendrons le temps d'échanger sur votre objectif et de définir le programme le plus adapté.</p>
+    <a class="modal-phone" href="tel:+33621900888">
+      <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
+      +33 6 21 90 08 88
+    </a>
+  </div>
+</div>
 
 <!-- MODAL CONTACT -->
 <div class="modal-overlay" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
@@ -825,12 +691,25 @@
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <a class="footer-logo" href="formations.html"> Académie de Bellefon </a>
-  <span class="footer-logo"> Étretat . Paris . Nice </span>
-  <span class="footer-copy">© 2026 · Tous droits réservés</span>
-</footer>
+<!-- MODAL OSTÉOPATHIE -->
+<div class="modal-overlay" id="osteo-modal" role="dialog" aria-modal="true" aria-labelledby="osteo-modal-title">
+  <div class="modal-box">
+    <button type="button" class="modal-close" id="close-osteo-modal" aria-label="Fermer">&times;</button>
+    <p class="modal-label">Ostéopathie</p>
+    <h3 class="modal-title" id="osteo-modal-title">Bilan-Traitement</h3>
+    <p class="modal-text" id="osteo-modal-text"></p>
+    <div class="modal-praticiens">
+      <a class="btn-doctolib" href="https://www.doctolib.fr/osteopathe/paris/emmanuel-de-bellefon?pid=practice-463641" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M19 4H5a3 3 0 00-3 3v10a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3zm1 13a1 1 0 01-1 1H5a1 1 0 01-1-1V9h16v8zm0-10H4V7a1 1 0 011-1h14a1 1 0 011 1v1z"/></svg>
+        RDV avec Emmanuel
+      </a>
+      <a class="btn-doctolib" href="https://www.doctolib.fr/osteopathe/paris/audrey-bucaille?pid=practice-444057" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M19 4H5a3 3 0 00-3 3v10a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3zm1 13a1 1 0 01-1 1H5a1 1 0 01-1-1V9h16v8zm0-10H4V7a1 1 0 011-1h14a1 1 0 011 1v1z"/></svg>
+        RDV avec Audrey
+      </a>
+    </div>
+  </div>
+</div>
 
 <script>
   (function () {
@@ -850,27 +729,34 @@
       }
     });
   })();
+
   (function () {
-    var isTouch = window.matchMedia('(hover: none)').matches;
-    if (!isTouch) return;
+    var openBtns = document.querySelectorAll('.js-open-coaching');
+    var closeBtn = document.getElementById('close-coaching-modal');
+    var overlay = document.getElementById('coaching-modal');
+    if (!openBtns.length || !overlay) return;
 
-    var tiles = document.querySelectorAll('.niveau-tile');
+    function openModal() {
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
 
-    tiles.forEach(function (tile) {
-      tile.addEventListener('click', function (e) {
-        if (!tile.classList.contains('is-active')) {
-          e.preventDefault();
-          tiles.forEach(function (t) { t.classList.remove('is-active'); });
-          tile.classList.add('is-active');
-        }
-        // sinon : la tuile est déjà active → le lien suit son cours normalement
-      });
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    openBtns.forEach(function (btn) {
+      btn.addEventListener('click', openModal);
+    });
+    closeBtn.addEventListener('click', closeModal);
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
     });
 
-    document.addEventListener('click', function (e) {
-      if (!e.target.closest('.niveau-tile')) {
-        tiles.forEach(function (t) { t.classList.remove('is-active'); });
-      }
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
     });
   })();
 
@@ -901,6 +787,103 @@
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+    });
+  })();
+
+  (function () {
+    var cards = document.querySelectorAll('.option-card');
+    var overlay = document.getElementById('osteo-modal');
+    var closeBtn = document.getElementById('close-osteo-modal');
+    var titleEl = document.getElementById('osteo-modal-title');
+    var textEl = document.getElementById('osteo-modal-text');
+    if (!cards.length || !overlay) return;
+
+    var isTouch = window.matchMedia('(hover: none)').matches;
+
+    function openModal(card) {
+      var name = card.querySelector('.option-name');
+      var desc = card.querySelector('.option-desc');
+      titleEl.textContent = name ? name.textContent : '';
+      textEl.textContent = desc ? desc.textContent : '';
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    cards.forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        if (isTouch && !card.classList.contains('is-active')) {
+          e.preventDefault();
+          cards.forEach(function (c) { c.classList.remove('is-active'); });
+          card.classList.add('is-active');
+          return;
+        }
+        openModal(card);
+      });
+    });
+
+    if (isTouch) {
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.option-card')) {
+          cards.forEach(function (c) { c.classList.remove('is-active'); });
+        }
+      });
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+    });
+  })();
+
+  (function () {
+    function navOffset() {
+      var nav = document.querySelector('nav');
+      return nav ? nav.getBoundingClientRect().height : 0;
+    }
+
+    function scrollToId(id, behavior) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var top = el.getBoundingClientRect().top + window.pageYOffset - navOffset();
+      window.scrollTo({ top: top, behavior: behavior || 'smooth' });
+    }
+
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a[href*="#"]');
+      if (!link) return;
+
+      var href = link.getAttribute('href');
+      var hashPos = href.indexOf('#');
+      var id = href.slice(hashPos + 1);
+      if (!id) return;
+
+      var pathPart = href.slice(0, hashPos);
+      var isSamePage = pathPart === '' || pathPart === 'rdv.html' || pathPart.endsWith('/rdv.html');
+      if (!isSamePage) return;
+
+      var el = document.getElementById(id);
+      if (!el) return;
+
+      e.preventDefault();
+      scrollToId(id);
+      history.replaceState(null, '', '#' + id);
+    });
+
+    window.addEventListener('load', function () {
+      if (window.__pendingHash) {
+        scrollToId(window.__pendingHash, 'auto');
+        history.replaceState(null, '', '#' + window.__pendingHash);
+      }
     });
   })();
 </script>
