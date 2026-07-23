@@ -3,6 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <script>
+    // Détection de langue : si le visiteur n'a jamais choisi et que son
+    // navigateur n'est pas configuré en français, on propose la version EN.
+    (function () {
+      try {
+        var stored = localStorage.getItem('site-lang');
+        if (stored === 'en') {
+          window.location.replace('en/index.html');
+          return;
+        }
+        if (!stored) {
+          var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+          if (lang && lang.indexOf('fr') !== 0) {
+            localStorage.setItem('site-lang', 'en');
+            window.location.replace('en/index.html');
+          }
+        }
+      } catch (e) { /* localStorage indisponible : on reste en FR */ }
+    })();
+  </script>
+  <script>
     (function () {
       if (window.location.hash) {
         window.__pendingHash = window.location.hash.slice(1);
@@ -602,6 +622,7 @@
   <ul class="nav-links">
     <li><a href="formations.html" class="active">Formations</a></li>
     <li><a href="rdv.html">Prendre RDV</a></li>
+    <li><a href="en/index.html" onclick="try{localStorage.setItem('site-lang','en')}catch(e){}">EN</a></li>
   </ul>
 </nav>
 
