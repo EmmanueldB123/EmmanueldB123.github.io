@@ -2,6 +2,26 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    // Détection de langue : si le visiteur n'a jamais choisi et que son
+    // navigateur n'est pas configuré en français, on propose la version EN.
+    (function () {
+      try {
+        var stored = localStorage.getItem('site-lang');
+        if (stored === 'en') {
+          window.location.replace('en/formations.html');
+          return;
+        }
+        if (!stored) {
+          var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+          if (lang && lang.indexOf('fr') !== 0) {
+            localStorage.setItem('site-lang', 'en');
+            window.location.replace('en/formations.html');
+          }
+        }
+      } catch (e) { /* localStorage indisponible : on reste en FR */ }
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Formations — Académie de Bellefon</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -750,6 +770,7 @@
   <ul class="nav-links">
     <li><a href="formations.html" class="active">Formations</a></li>
     <li><a href="rdv.html">Prendre RDV</a></li>
+    <li><a href="en/formations.html" onclick="try{localStorage.setItem('site-lang','en')}catch(e){}">EN</a></li>
   </ul>
 </nav>
 
