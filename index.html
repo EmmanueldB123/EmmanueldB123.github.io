@@ -335,6 +335,7 @@
       flex-direction: column;
       gap: 1.5rem;
       transition: border-color 0.3s;
+      cursor: pointer;
     }
 
     .praticien-card:hover { border-color: var(--gold); }
@@ -700,7 +701,7 @@
   <h2 class="section-title">Rencontrez<br>Emmanuel & Audrey</h2>
   <div class="praticiens-grid">
 
-    <div class="praticien-card">
+    <div class="praticien-card" onclick="location.href='rdv.html'">
       <img class="praticien-photo" src="Emmanuel_photo.png" alt="Emmanuel de Bellefon" />
       <div>
         <div class="praticien-role">Ostéopathe D.O. & Coach</div>
@@ -709,13 +710,13 @@
       <p class="praticien-bio">
         Ostéopathe, conférencier et spécialiste de la gestion du stress, Emmanuel accompagne celles et ceux qui souhaitent retrouver un équilibre durable entre le corps, les émotions et le mental. Son parcours atypique, de CentraleSupélec à l'ostéopathie en passant par la finance et le plongeon de haut vol, nourrit une approche unique de la performance humaine et de la résilience. À l'écoute, exigeant et profondément engagé, il aide chacun à retrouver ses ressources pour avancer avec plus de sérénité et de justesse. Sa conviction : l'alignement du Corps, du Cœur et de l'Esprit ouvre la voie à des transformations durables.
       </p>
-      <a class="btn-doctolib" href="https://www.doctolib.fr/osteopathe/paris/emmanuel-de-bellefon?pid=practice-463641" target="_blank" rel="noopener">
+      <a class="btn-doctolib" href="https://www.doctolib.fr/osteopathe/paris/emmanuel-de-bellefon?pid=practice-463641" target="_blank" rel="noopener" onclick="event.stopPropagation()">
         <svg viewBox="0 0 24 24"><path d="M19 4H5a3 3 0 00-3 3v10a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3zm1 13a1 1 0 01-1 1H5a1 1 0 01-1-1V9h16v8zm0-10H4V7a1 1 0 011-1h14a1 1 0 011 1v1z"/></svg>
         Prendre RDV sur Doctolib
       </a>
     </div>
 
-    <div class="praticien-card">
+    <div class="praticien-card" onclick="location.href='rdv.html'">
       <img class="praticien-photo" src="Audrey_photo.png" alt="Audrey Bucaille" />
       <div>
         <div class="praticien-role">Ostéopathe D.O. & Coach</div>
@@ -724,7 +725,7 @@
       <p class="praticien-bio">
         Ostéopathe et coach sportif, Audrey accompagne celles et ceux qui souhaitent retrouver un corps plus libre, plus fort et durablement en équilibre. Elle s'appuie sur une approche globale, nourrie par plusieurs milliers d'heures de coaching et une solide expérience clinique. Son écoute, sa douceur et la précision de son analyse lui permettent de proposer un accompagnement entièrement personnalisé. Sa conviction est simple : la vie, c'est le mouvement. En redonnant au corps sa mobilité, chacun retrouve le plaisir de bouger, de respirer et de vivre pleinement.
       </p>
-      <a class="btn-doctolib" href="https://www.doctolib.fr/osteopathe/paris/audrey-bucaille?pid=practice-444057" target="_blank" rel="noopener">
+      <a class="btn-doctolib" href="https://www.doctolib.fr/osteopathe/paris/audrey-bucaille?pid=practice-444057" target="_blank" rel="noopener" onclick="event.stopPropagation()">
         <svg viewBox="0 0 24 24"><path d="M19 4H5a3 3 0 00-3 3v10a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3zm1 13a1 1 0 01-1 1H5a1 1 0 01-1-1V9h16v8zm0-10H4V7a1 1 0 011-1h14a1 1 0 011 1v1z"/></svg>
         Prendre RDV sur Doctolib
       </a>
