@@ -322,6 +322,7 @@
       flex-direction: column;
       gap: 1.5rem;
       transition: border-color 0.3s;
+      cursor: pointer;
     }
 
     .praticien-card:hover { border-color: var(--gold); }
@@ -687,7 +688,7 @@
   <h2 class="section-title">Meet<br>Emmanuel & Audrey</h2>
   <div class="praticiens-grid">
 
-    <div class="praticien-card">
+    <div class="praticien-card" onclick="location.href='rdv.html'">
       <img class="praticien-photo" src="../Emmanuel_photo.png" alt="Emmanuel de Bellefon" />
       <div>
         <div class="praticien-role">Osteopath D.O. & Coach</div>
@@ -696,13 +697,13 @@
       <p class="praticien-bio">
         Osteopath, speaker and stress-management specialist, Emmanuel supports those seeking lasting balance between body, emotions and mind. His unconventional path — from CentraleSupélec to osteopathy, via finance and high diving — feeds a unique approach to human performance and resilience. Attentive, demanding and deeply committed, he helps each person reconnect with their own resources to move forward with more serenity and clarity. His conviction: aligning Body, Heart and Mind opens the way to lasting transformation.
       </p>
-      <a class="btn-doctolib" href="https://www.doctolib.fr/osteopathe/paris/emmanuel-de-bellefon?pid=practice-463641" target="_blank" rel="noopener">
+      <a class="btn-doctolib" href="https://www.doctolib.fr/osteopathe/paris/emmanuel-de-bellefon?pid=practice-463641" target="_blank" rel="noopener" onclick="event.stopPropagation()">
         <svg viewBox="0 0 24 24"><path d="M19 4H5a3 3 0 00-3 3v10a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3zm1 13a1 1 0 01-1 1H5a1 1 0 01-1-1V9h16v8zm0-10H4V7a1 1 0 011-1h14a1 1 0 011 1v1z"/></svg>
         Book on Doctolib
       </a>
     </div>
 
-    <div class="praticien-card">
+    <div class="praticien-card" onclick="location.href='rdv.html'">
       <img class="praticien-photo" src="../Audrey_photo.png" alt="Audrey Bucaille" />
       <div>
         <div class="praticien-role">Osteopath D.O. & Coach</div>
@@ -711,7 +712,7 @@
       <p class="praticien-bio">
         Osteopath and sports coach, Audrey supports those seeking a freer, stronger body in lasting balance. She relies on a holistic approach, built on thousands of hours of coaching and solid clinical experience. Her attentiveness, gentleness and precise analysis allow her to offer fully personalised support. Her conviction is simple: life is movement. By restoring the body's mobility, everyone rediscovers the pleasure of moving, breathing and living fully.
       </p>
-      <a class="btn-doctolib" href="https://www.doctolib.fr/osteopathe/paris/audrey-bucaille?pid=practice-444057" target="_blank" rel="noopener">
+      <a class="btn-doctolib" href="https://www.doctolib.fr/osteopathe/paris/audrey-bucaille?pid=practice-444057" target="_blank" rel="noopener" onclick="event.stopPropagation()">
         <svg viewBox="0 0 24 24"><path d="M19 4H5a3 3 0 00-3 3v10a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3zm1 13a1 1 0 01-1 1H5a1 1 0 01-1-1V9h16v8zm0-10H4V7a1 1 0 011-1h14a1 1 0 011 1v1z"/></svg>
         Book on Doctolib
       </a>
