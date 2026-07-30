@@ -87,10 +87,18 @@
 
     .nav-logo-line + .nav-logo-line { margin-left: 0.3em; }
 
+    /* Groupe gauche du bandeau : nom + signature, indépendant du menu de droite.
+       La position de la signature ne dépend ainsi plus de la largeur du menu
+       (qui varie selon la langue), ce qui évite le décalage FR/EN. */
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
     .nav-signature {
       display: inline-flex;
       align-items: center;
-      margin-left: -30rem;
     }
 
     .nav-signature-img {
@@ -550,6 +558,12 @@
         letter-spacing: 0.14em;
       }
       .nav-logo-line + .nav-logo-line { margin-left: 0; }
+      /* En mobile, on annule le groupement : nav-logo et nav-signature
+         redeviennent des enfants flex directs de <nav>, pilotés par order,
+         exactement comme avant (vue mobile inchangée). */
+      .nav-left {
+        display: contents;
+      }
       .nav-signature {
         margin-left: 0;
         order: 2;
@@ -759,8 +773,10 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="index.html"><span class="nav-logo-line">Académie</span><span class="nav-logo-line">de Bellefon</span></a>
-  <a class="nav-signature" href="index.html" aria-label="Retour à l'accueil"><img class="nav-signature-img" src="signature_Transparent.png" alt="Signature E. de Bellefon" /></a>
+  <div class="nav-left">
+    <a class="nav-logo" href="index.html"><span class="nav-logo-line">Académie</span><span class="nav-logo-line">de Bellefon</span></a>
+    <a class="nav-signature" href="index.html" aria-label="Retour à l'accueil"><img class="nav-signature-img" src="signature_Transparent.png" alt="Signature E. de Bellefon" /></a>
+  </div>
   <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" />
   <label for="nav-toggle" class="nav-toggle-label" aria-label="Ouvrir le menu">
     <span></span>
